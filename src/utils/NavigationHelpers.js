@@ -13,7 +13,7 @@ export function navigateToScreenAndReplace(name, params) {
 }
 
 export function navigateToScreenInTab(name, params) {
-  navigationRef.current?.navigate(SCREEN_NAME.MAIN_TAB, { screen: name, params })
+  navigationRef.current?.navigate(SCREEN_NAME.MainTab, { screen: name, params })
 }
 
 export function navigateBack() {

@@ -8,7 +8,7 @@ export const Colors = {
   primaryBlue: '#40BFFF',
   primaryRed: '#FB7181',
   primaryYellow: '#FFC833',
-  primaryGreen: '#53D1B6',
+  primaryGreen: '#11942D',
   primaryPulple: '#5C61F4',
   neutralDark: '#223263',
   neutralGrey: '#9098B1',
@@ -63,7 +63,7 @@ export const TextStyles = {
   },
   bodyLargeTextRegular: {
     ...Fonts.regular,
-    fontSize: 16,
+    fontSize: 17,
   },
   bodyMediumTextBold: {
     ...Fonts.bold,

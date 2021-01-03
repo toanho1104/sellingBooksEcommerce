@@ -2,17 +2,15 @@ import { images } from '../../assets/images'
 import { Colors } from '../../assets/styles'
 
 export const SCREEN_NAME = {
-  MAIN_TAB: 'MAIN_TAB',
-  SplashScreen: 'SplashScreen',
-  LoginScreen: 'LoginScreen',
-  RegisterScreen: 'RegisterScreen',
-  HomeScreen: 'HomeScreen',
-  ExploreScreen: 'ExploreScreen',
-  CartScreen: 'CartScreen',
-  OfferScreen: 'OfferScreen',
-  AccountScreen: 'AccountScreen',
-  ProductDetailScreen: 'ProductDetailScreen',
+  trangChu: 'trangChu',
+  khamPha: 'khamPha',
+  gioHang: 'gioHang',
+  taiKhoan: 'taiKhoan',
+  ThongTinTaiKhoan: 'ThongTinTaiKhoan',
+  MainTab: 'MainTab',
+
 }
+
 export const sizeData = [
   '6', '6.5', '7', '7.5', '8', '8.5',
 ]
@@ -47,3 +45,73 @@ export const TAB_DATA = [
 ]
 
 export const API_URL = 'https://huymanh.dev/ecommerce/api'
+
+export const DataItem = [
+  {
+    image: images.dacnhantam,
+    title: 'Đắc Nhân Tâm',
+    price: '160.000',
+  },
+  {
+    image: images.tatden,
+    title: 'Tắt Đèn',
+    price: '300.000',
+  }, {
+    image: images.nhatkytrongtu,
+    title: 'Nhật ký Trong Tù',
+    price: '150.000',
+  }, {
+    image: images.dacnhantam,
+    title: 'Giáo Trình Photoshop',
+    price: '360.000',
+  }, {
+    image: images.dacnhantam,
+    title: 'Có Thể Bạn Chưa biết',
+    price: '120.000',
+  },
+]
+
+export const Danhsachsp = [
+  {
+    image: images.hoihoa,
+    title: 'Hội Họa',
+
+  },
+  {
+    image: images.nhiepanh,
+    title: 'Nhiếp Ảnh',
+
+  }, {
+    image: images.thethao,
+    title: 'Thể Thao',
+
+  }, {
+    image: images.khoahoc,
+    title: 'Khoa Học',
+
+  }, {
+    image: images.tinhoc,
+    title: 'Tin Học',
+
+  },
+  {
+    image: images.amnhac,
+    title: 'Âm Nhạc',
+
+  },
+  {
+    image: images.amthuc,
+    title: 'Ẩm Thực',
+
+  },
+  {
+    image: images.hoihoa,
+    title: 'Hội Họa',
+
+  },
+  {
+    image: images.thoitrang,
+    title: 'Thời Trang',
+
+  },
+]
