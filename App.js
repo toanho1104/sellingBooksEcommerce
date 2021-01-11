@@ -3,14 +3,17 @@ import {
   View, Text, Image, Dimensions,
 
 } from 'react-native'
+import FlashMessage from 'react-native-flash-message'
+import { Provider } from 'react-redux'
 import { AnimatedTabBarNavigator } from 'react-native-animated-nav-tab-bar'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
+import store from './src/redux/store'
 import { Fonts, Colors } from './assets/styles'
 import {
-  taiKhoan, gioHang, khamPha, trangChu, ThongTinTaiKhoan,
+  taiKhoan, gioHang, khamPha, trangChu, ThongTinTaiKhoan, SplashScreen, LoginScreen, RegisterScreen, DanhSachSP, ChiTietSP, UpdateUserProfile,
 } from './src/screens'
 import { images } from './assets/images'
 import { SCREEN_NAME } from './src/configs'
@@ -84,17 +87,30 @@ const MainTab = () => {
 }
 const App = () => {
   return (
-    <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator screenOptions={{
-        headerShown: false,
-      }}
+    <Provider store={store}>
+      <NavigationContainer
+        ref={navigationRef}
       >
-        <Stack.Screen name={SCREEN_NAME.MainTab} component={MainTab} />
-        <Stack.Screen name={SCREEN_NAME.khamPha} component={khamPha} />
-        <Stack.Screen name={SCREEN_NAME.trangChu} component={trangChu} />
-        <Stack.Screen name={SCREEN_NAME.ThongTinTaiKhoan} component={ThongTinTaiKhoan} />
-      </Stack.Navigator>
-    </NavigationContainer>
+        <Stack.Navigator screenOptions={{
+          headerShown: false,
+        }}
+        >
+          <Stack.Screen name={SCREEN_NAME.SplashScreen} component={SplashScreen} />
+          <Stack.Screen name={SCREEN_NAME.LoginScreen} component={LoginScreen} />
+          <Stack.Screen name={SCREEN_NAME.RegisterScreen} component={RegisterScreen} />
+
+          <Stack.Screen name={SCREEN_NAME.MainTab} component={MainTab} />
+          <Stack.Screen name={SCREEN_NAME.khamPha} component={khamPha} />
+          <Stack.Screen name={SCREEN_NAME.trangChu} component={trangChu} />
+          <Stack.Screen name={SCREEN_NAME.ThongTinTaiKhoan} component={ThongTinTaiKhoan} />
+          <Stack.Screen name={SCREEN_NAME.UpdateUserProfile} component={UpdateUserProfile} />
+          <Stack.Screen name={SCREEN_NAME.DanhSachSP} component={DanhSachSP} />
+          <Stack.Screen name={SCREEN_NAME.ChiTietSP} component={ChiTietSP} />
+
+        </Stack.Navigator>
+      </NavigationContainer>
+      <FlashMessage position="top" />
+    </Provider>
   )
 }
 export default App

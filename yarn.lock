@@ -6542,6 +6542,11 @@ react-native-animated-nav-tab-bar@3.0.5:
     react-native-screens "^2.11.0"
     styled-components "^4.3.2"
 
+react-native-currency-input@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-currency-input/-/react-native-currency-input-0.1.2.tgz#e619b6252d74b81f9351a16f1a2dd90e5d2de97f"
+  integrity sha512-v/io3g4HMmabuRXpsuwDhtSnwyN2wdZItNC8C1k6XLlDR1ZG97pAFpNPvoLzpq+LOaFhllfOkCG0zAKYpLSJ0w==
+
 react-native-dash@0.0.11:
   version "0.0.11"
   resolved "https://registry.yarnpkg.com/react-native-dash/-/react-native-dash-0.0.11.tgz#cf1b0108e4660217cf0300b872231a5cadb9c4a8"

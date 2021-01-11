@@ -4,6 +4,9 @@ const images = {
   khamPha: require('./khamPha.png'),
   gioHang: require('./gioHang.png'),
   taiKhoan: require('./taiKhoan.png'),
+  logo: require('./logo.jpg'),
+  email: require('./email.png'),
+  matkhau: require('./matkhau.png'),
   // tai khoan
   imageAvatar: require('./imageAvatar.jpg'),
   doiten: require('./IconChangeName.png'),
@@ -23,6 +26,7 @@ const images = {
   tatden: require('./tatden.jpg'),
   nhatkytrongtu: require('./nhatkytrongtu.jpg'),
   them: require('./add.png'),
+  xoa: require('./xoa.png'),
   // kham pha
   sachhay1: require('./sachhay1.jpg'),
   sachhay2: require('./sachhay2.jpg'),

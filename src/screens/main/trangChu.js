@@ -1,19 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView, Dimensions, FlatList,
 } from 'react-native'
 import Swiper from 'react-native-swiper'
 import FastImage from 'react-native-fast-image'
 import * as Animatable from 'react-native-animatable'
+import { useSelector } from 'react-redux'
+import { createSelector } from 'reselect'
 import { images } from '../../../assets/images'
 import { TitleDSSanpham, Item } from '../../components'
-import { DataItem } from '../../configs'
+import { DataItem, SCREEN_NAME } from '../../configs'
 import { Colors } from '../../../assets/styles'
+
+import { Helpers, NavigationHelpers } from '../../utils'
 
 const { width } = Dimensions.get('window')
 const rate = width / 375
 
-const trangChu = () => {
+const TrangChu = () => {
+  const token = useSelector(createSelector((state) => state.user, (user) => user.token))
+  // const products = useSelector(createSelector((state) => state.products, (products) => products))
+  const products = useSelector((state) => state.products, (products) => products)
+
+  console.tron.log({ aaaaa: products })
   return (
     <View style={styles.container}>
       <ScrollView
@@ -68,9 +77,16 @@ const trangChu = () => {
         >
           <FlatList
             style={{}}
-            data={DataItem}
-            keyExtractor={(item, index) => `list-user-${index}`}
-            renderItem={Item}
+            data={products}
+            extraData={products}
+            keyExtractor={(item) => `list-product1-${item?.id}`}
+            renderItem={({ item, index }) => {
+              return (
+                <Item
+                  item={item}
+                />
+              )
+            }}
             horizontal
             showsHorizontalScrollIndicator={false}
           />
@@ -83,7 +99,7 @@ const trangChu = () => {
           <TitleDSSanpham title="Sản phẩm ngẩu nhiên" />
         </View>
 
-        <Animatable.View
+        {/* <Animatable.View
           animation="bounceInUp"
           delay={350}
           duration={1100}
@@ -101,13 +117,13 @@ const trangChu = () => {
             showsHorizontalScrollIndicator={false}
           // numColumns={2}
           />
-        </Animatable.View>
+        </Animatable.View> */}
 
       </ScrollView>
     </View>
   )
 }
-export default trangChu
+export default TrangChu
 const styles = StyleSheet.create({
   container: {
     flex: 1,

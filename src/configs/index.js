@@ -8,6 +8,12 @@ export const SCREEN_NAME = {
   taiKhoan: 'taiKhoan',
   ThongTinTaiKhoan: 'ThongTinTaiKhoan',
   MainTab: 'MainTab',
+  SplashScreen: 'SplashScreen',
+  LoginScreen: 'LoginScreen',
+  RegisterScreen: 'RegisterScreen',
+  ChiTietSP: 'ChiTietSP',
+  DanhSachSP: 'DanhSachSP',
+  UpdateUserProfile: 'UpdateUserProfile',
 
 }
 
@@ -44,7 +50,7 @@ export const TAB_DATA = [
   },
 ]
 
-export const API_URL = 'https://huymanh.dev/ecommerce/api'
+export const API_URL = 'http://192.168.1.68:3000'
 
 export const DataItem = [
   {

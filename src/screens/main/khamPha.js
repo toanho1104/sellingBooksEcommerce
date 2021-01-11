@@ -6,13 +6,17 @@ import FastImage from 'react-native-fast-image'
 import * as Animatable from 'react-native-animatable'
 import { images } from '../../../assets/images'
 import { Colors, Fonts, TextStyles } from '../../../assets/styles'
-import { Danhsachsp } from '../../configs'
+import { Danhsachsp, SCREEN_NAME } from '../../configs'
+import { Helpers, NavigationHelpers } from '../../utils'
 
 const { width } = Dimensions.get('window')
 const rate = width / 375
 const numColumns = 4
 const calSize = width / numColumns
 const khamPha = () => {
+  const vaoDanhSachSP = () => {
+    NavigationHelpers.navigateToScreen(SCREEN_NAME.DanhSachSP)
+  }
   return (
     <View style={styles.container}>
       <View style={{
@@ -64,7 +68,7 @@ const khamPha = () => {
           columnWrapperStyle={{ marginBottom: 16 }}
           renderItem={({ item, index }) => {
             return (
-              <TouchableOpacity>
+              <TouchableOpacity onPress={vaoDanhSachSP}>
                 <Animatable.View
                   animation="tada"
                   delay={350}
@@ -106,9 +110,7 @@ const khamPha = () => {
           }}
         />
       </View>
-
     </View>
-
   )
 }
 export default khamPha

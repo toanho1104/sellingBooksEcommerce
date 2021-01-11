@@ -4,16 +4,21 @@ import {
 } from 'react-native'
 
 import FastImage from 'react-native-fast-image'
-
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { images } from '../../../assets/images'
 import { Colors, Fonts } from '../../../assets/styles'
 import { Helpers, NavigationHelpers } from '../../utils'
+import { SCREEN_NAME } from '../../configs'
 
 const { width } = Dimensions.get('window')
 const rate = width / 375
 
 const ThongTinTaiKhoan = () => {
+  const user = useSelector((state) => state.user, (user) => user)
+  const handlePressUpdateProfile = () => {
+    NavigationHelpers.navigateToScreen(SCREEN_NAME.UpdateUserProfile)
+  }
   return (
     <View style={styles.container}>
       <View style={{
@@ -51,35 +56,35 @@ const ThongTinTaiKhoan = () => {
       </View>
       <ItemThongTin
         muc="Họ và tên"
-        thongtin="Toàn Hồ"
+        thongtin={user[0].hovaten}
       />
       <ItemThongTin
         muc="Email"
-        thongtin="Toanho1104@gmail.com"
+        thongtin={user[0].email}
       />
       <ItemThongTin
         muc="Số điện thoại"
-        thongtin="+84336222456"
+        thongtin={user[0].sodienthoai}
       />
       <ItemThongTin
-        muc="Họ và tên"
-        thongtin="Toàn Hồ"
+        muc="Địa chỉ"
+        thongtin={user[0].diachi}
       />
-
-      <View style={{
-        backgroundColor: Colors.primaryGreen,
-        width: 100 * rate,
-        borderRadius: 17 * rate,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 15 * rate,
-        marginTop: 15 * rate,
-      }}
-      >
-        <Text style={{ ...Fonts.regular, fontSize: 15 * rate, color: Colors.backgroundWhite }}>Cập nhật</Text>
-      </View>
+      <TouchableOpacity onPress={handlePressUpdateProfile}>
+        <View style={{
+          backgroundColor: Colors.primaryGreen,
+          width: 100 * rate,
+          borderRadius: 17 * rate,
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginLeft: 15 * rate,
+          marginTop: 15 * rate,
+        }}
+        >
+          <Text style={{ ...Fonts.regular, fontSize: 15 * rate, color: Colors.backgroundWhite }}>Cập nhật</Text>
+        </View>
+      </TouchableOpacity>
     </View>
-
   )
 }
 const styles = StyleSheet.create({

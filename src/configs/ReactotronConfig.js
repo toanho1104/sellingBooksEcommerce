@@ -8,7 +8,7 @@ const reactotron = Reactotron
   .configure({
     name: 'Ecommerce React Native',
     host: 'localhost',
-    port: 6969,
+    port: 9090,
   })
   .useReactNative()
   .use(reactotronRedux())

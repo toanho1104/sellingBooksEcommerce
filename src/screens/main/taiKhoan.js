@@ -7,6 +7,7 @@ import {
 import FastImage from 'react-native-fast-image'
 
 import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 import { images } from '../../../assets/images'
 import { Colors, Fonts, TextStyles } from '../../../assets/styles'
 import { Helpers, NavigationHelpers } from '../../utils'
@@ -20,7 +21,13 @@ const rate = width / 375
 const handlePressMoreCategory = () => {
   NavigationHelpers.navigateToScreen(SCREEN_NAME.ThongTinTaiKhoan)
 }
-const taiKhoan = () => {
+const dangxuat = () => {
+  NavigationHelpers.navigateToScreen(SCREEN_NAME.LoginScreen)
+}
+const taiKhoan = (props) => {
+  const user = useSelector((state) => state.user, (user) => user)
+
+  // console.log('useSelector', user[0].tentaikhoan)
   const [isShowModalLogout, setIsShowModalLogout] = useState(false)
   const aniShowModal = useRef(new Animated.Value(0)).current
 
@@ -60,21 +67,21 @@ const taiKhoan = () => {
         >
           <View>
             <FastImage
-              source={images.imageAvatar}
+              source={user[0].imageurl ? { uri: user[0].imageurl } : images.imageAvatar}
               style={{ height: 65 * rate, width: 65 * rate, borderRadius: 30 * rate }}
               resizeMode="cover"
             />
           </View>
           <View style={{ marginLeft: 15 * rate }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{ ...Fonts.bold, fontSize: 20 * rate, color: Colors.neutralDark }}>Toan Ho</Text>
+              <Text style={{ ...Fonts.bold, fontSize: 20 * rate, color: Colors.neutralDark }}>{user[0].hovaten}</Text>
               <FastImage
                 source={images.doiten}
                 style={{ width: 20 * rate, height: 20 * rate, marginLeft: 7 * rate }}
                 resizeMode="cover"
               />
             </View>
-            <Text style={{ ...Fonts.regular, fontSize: 15 * rate, color: '#7C7C7C' }}>toanho1104@gmail.com</Text>
+            <Text style={{ ...Fonts.regular, fontSize: 15 * rate, color: '#7C7C7C' }}>{user[0].email}</Text>
           </View>
         </View>
       </View>
@@ -163,11 +170,9 @@ const taiKhoan = () => {
             </Text>
 
             <TouchableOpacity
-              onPress={() => {
-                handleHideModalLogout()
-                // NavigationHelpers.navigateToScreenAndReplace(SCREEN_NAME.LoginScreen)
-              }}
+              onPress={dangxuat}
             >
+
               <View style={{
                 width: 250 / 375 * width,
                 height: 40 / 375 * width,
@@ -189,6 +194,7 @@ const taiKhoan = () => {
                   Đăng xuất
                 </Text>
               </View>
+
             </TouchableOpacity>
           </Animated.View>
         </View>
