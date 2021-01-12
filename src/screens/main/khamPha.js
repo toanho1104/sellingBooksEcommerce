@@ -4,6 +4,8 @@ import {
 } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import * as Animatable from 'react-native-animatable'
+import { useSelector } from 'react-redux'
+import { createSelector } from 'reselect'
 import { images } from '../../../assets/images'
 import { Colors, Fonts, TextStyles } from '../../../assets/styles'
 import { Danhsachsp, SCREEN_NAME } from '../../configs'
@@ -14,8 +16,9 @@ const rate = width / 375
 const numColumns = 4
 const calSize = width / numColumns
 const khamPha = () => {
-  const vaoDanhSachSP = () => {
-    NavigationHelpers.navigateToScreen(SCREEN_NAME.DanhSachSP)
+  const categories = useSelector(createSelector((state) => state.categories, (categories) => categories))
+  const handleViewCategoriesDetail = (categories) => {
+    NavigationHelpers.navigateToScreen(SCREEN_NAME.DanhSachSP, { categories })
   }
   return (
     <View style={styles.container}>
@@ -61,14 +64,14 @@ const khamPha = () => {
         <FlatList
           style={{ marginBottom: 24, marginTop: 12 }}
           showsHorizontalScrollIndicator={false}
-          data={Danhsachsp}
-          // extraData={categories}
-          keyExtractor={(item, index) => `list-user-${index}`}
+          data={categories}
+          extraData={categories}
+          keyExtractor={(item, index) => `list-categories-${index}`}
           numColumns={numColumns}
           columnWrapperStyle={{ marginBottom: 16 }}
           renderItem={({ item, index }) => {
             return (
-              <TouchableOpacity onPress={vaoDanhSachSP}>
+              <TouchableOpacity onPress={() => handleViewCategoriesDetail(item)}>
                 <Animatable.View
                   animation="tada"
                   delay={350}
@@ -86,7 +89,7 @@ const khamPha = () => {
                   }}
                   >
                     <FastImage
-                      source={item.image}
+                      source={{ uri: item.imageurl }}
                       style={{ width: 60 * rate, height: 60 * rate }}
                       resizeMode="contain"
                     />
@@ -101,7 +104,7 @@ const khamPha = () => {
                     height: 30,
                   }}
                   >
-                    {item.title}
+                    {item.tentheloai}
 
                   </Text>
                 </Animatable.View>

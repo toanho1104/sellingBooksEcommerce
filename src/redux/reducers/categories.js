@@ -1,11 +1,11 @@
 /* eslint-disable no-case-declarations */
-import { productTypes } from '../types'
+import { categoryTypes } from '../types'
 
 const initState = []
 
 const productReducer = (state = initState, action) => {
   switch (action.type) {
-    case productTypes.GET_PRODUCTS_SUCCESS:
+    case categoryTypes.GET_CATEGORIES_SUCCESS:
       return action?.payload?.data?.data
     default:
       return state

@@ -61,12 +61,11 @@ function* loadingProfileUser(action) {
   const {
     tendangnhap,
   } = data
-  console.log('iddddddddddddddddddd', data)
   try {
     const response = yield call(() => axios.post(`${API_URL}/taikhoan/thongtintaikhoan`, {
       tendangnhap,
     }))
-    console.tron.log({ bbbb: response })
+
     yield put({
       type: userTypes.LOADING_PROFILE_USER_SUCCESS,
       payload: { data: response.data },

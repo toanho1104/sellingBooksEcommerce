@@ -18,7 +18,6 @@ const { width } = Dimensions.get('window')
 const rate = width / 375
 
 const TrangChu = () => {
-  const token = useSelector(createSelector((state) => state.user, (user) => user.token))
   // const products = useSelector(createSelector((state) => state.products, (products) => products))
   const products = useSelector((state) => state.products, (products) => products)
 

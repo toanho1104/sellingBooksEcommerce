@@ -28,26 +28,28 @@ const LoginScreen = (props) => {
       tendangnhap: emailUser,
       matkhau: passwordUser,
     }, (response) => {
-      console.log('input user login', response)
-      // console.log(response)
       if (response?.success) {
         dispatch(productActions.getProducts({
-        }, (responsea) => {
-          // console.log('product', responsea)
-          dispatch(userActions.loadingProfileUser({
-            tendangnhap: emailUser,
-
-          }, (responseL) => {
-            console.log('loading tai khoan', responseL)
-          }))
-          if (responsea?.success) {
-            // console.log('dung-------------------------')
-            Helpers.showMess('Đăng nhập thành công', 'success')
-            NavigationHelpers.navigateToScreenInTab(SCREEN_NAME.MainTab)
-            return
+        }, (responseP) => {
+          console.log('product', responseP)
+          if (responseP?.success) {
+            console.log(responseP.success)// dat
+            dispatch(categoryActions.getCategorys({
+            }, (responseC) => {
+              console.log('load the loai', responseC)
+              if (responseC?.success) {
+                dispatch(userActions.loadingProfileUser({
+                  tendangnhap: emailUser,
+                }, (responseL) => {
+                  console.log('loading tai khoan', responseL)
+                  if (response?.success) {
+                    Helpers.showMess('Đăng nhập thành công', 'success')
+                    NavigationHelpers.navigateToScreenInTab(SCREEN_NAME.MainTab)
+                  }
+                }))
+              }
+            }))
           }
-          // console.log('sai-------------------------')
-          NavigationHelpers.navigateToScreenAndReplace(SCREEN_NAME.MainTab)
         }))
       } else {
         console.log(response)

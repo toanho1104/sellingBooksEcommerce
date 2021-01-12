@@ -11,6 +11,8 @@ import {
 } from 'react-native'
 import * as Animatable from 'react-native-animatable'
 import FastImage from 'react-native-fast-image'
+import { useSelector } from 'react-redux'
+import { createSelector } from 'reselect'
 import { images } from '../../../assets/images'
 import { Colors, Fonts } from '../../../assets/styles'
 import { DataItem, SCREEN_NAME } from '../../configs'
@@ -21,7 +23,8 @@ import { Helpers, NavigationHelpers } from '../../utils'
 const { width } = Dimensions.get('window')
 const rate = width / 375
 
-const ChiTietSP = () => {
+const DanhSachSP = () => {
+  const products = useSelector((state) => state.products, (products) => products)
   return (
     <View style={style.Container}>
       <View style={{
@@ -53,20 +56,24 @@ const ChiTietSP = () => {
         >
           <FlatList
             style={{}}
-            data={DataItem}
-            keyExtractor={(item, index) => `list-user-${index}`}
-            renderItem={Item}
+            data={products}
+            keyExtractor={(item, index) => `listcaata-${index}`}
             showsHorizontalScrollIndicator={false}
             numColumns={2}
+            renderItem={({ item, index }) => {
+              return (
+                <View>
+                  <Text>aaa</Text>
+                </View>)
+            }
           />
+
         </Animatable.View>
-
       </View>
-
     </View>
   )
 }
-export default ChiTietSP
+export default DanhSachSP
 const style = StyleSheet.create({
   Container: {
     flex: 1,
