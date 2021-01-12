@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   View,
   Text,
@@ -23,8 +23,28 @@ import { Helpers, NavigationHelpers } from '../../utils'
 const { width } = Dimensions.get('window')
 const rate = width / 375
 
-const DanhSachSP = () => {
+const DanhSachSP = (props) => {
+  console.tron.log({ props })
+  const { route } = props
+  const { params } = route
+  const [idTheLoai, setidTheLoai] = useState(params?.id)
+  console.log(idTheLoai)
   const products = useSelector((state) => state.products, (products) => products)
+
+  useEffect(() => {
+    if (params?.id) {
+      setidTheLoai(params?.id)
+      LocSp()
+    }
+  }, [])
+  const [sanPham, setSanPham] = useState()
+
+  const LocSp = () => {
+    const a = products.filter((item) => {
+      return item.idtheloai === idTheLoai
+    })
+    setSanPham(a)
+  }
   return (
     <View style={style.Container}>
       <View style={{
@@ -56,8 +76,8 @@ const DanhSachSP = () => {
         >
           <FlatList
             style={{}}
-            data={products}
-            keyExtractor={(item, index) => `listcaata-${index}`}
+            data={sanPham}
+            keyExtractor={(item, index) => `listcaata-${index.id === 1}`}
             showsHorizontalScrollIndicator={false}
             numColumns={2}
             renderItem={({ item, index }) => {
@@ -74,6 +94,7 @@ const DanhSachSP = () => {
   )
 }
 export default DanhSachSP
+
 const style = StyleSheet.create({
   Container: {
     flex: 1,

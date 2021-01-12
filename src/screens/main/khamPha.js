@@ -17,8 +17,8 @@ const numColumns = 4
 const calSize = width / numColumns
 const khamPha = () => {
   const categories = useSelector(createSelector((state) => state.categories, (categories) => categories))
-  const handleViewCategoriesDetail = (categories) => {
-    NavigationHelpers.navigateToScreen(SCREEN_NAME.DanhSachSP, { categories })
+  const handleViewCategoriesDetail = (item) => {
+    NavigationHelpers.navigateToScreen(SCREEN_NAME.DanhSachSP, { id: item.id })
   }
   return (
     <View style={styles.container}>
@@ -70,6 +70,7 @@ const khamPha = () => {
           numColumns={numColumns}
           columnWrapperStyle={{ marginBottom: 16 }}
           renderItem={({ item, index }) => {
+            console.tron.log({ item })
             return (
               <TouchableOpacity onPress={() => handleViewCategoriesDetail(item)}>
                 <Animatable.View
