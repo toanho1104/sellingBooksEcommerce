@@ -30,10 +30,7 @@ const RenderItemSP = ({ item }) => {
     console.tron.log({ item })
     NavigationHelpers.navigateToScreen(SCREEN_NAME.ChiTietSP, item)
   }
-  console.tron.log({ item })
-  const a = item.giaban
   // const formatedCurrency = new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' })
-
   return (
 
     <View style={{

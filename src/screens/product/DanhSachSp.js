@@ -62,12 +62,12 @@ const DanhSachSP = () => {
             numColumns={2}
             renderItem={({ item, index }) => {
               return (
-                <View>
-                  <Text>aaa</Text>
-                </View>)
-            }
+                <Item
+                  item={item}
+                />
+              )
+            }}
           />
-
         </Animatable.View>
       </View>
     </View>
