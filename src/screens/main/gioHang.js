@@ -50,6 +50,18 @@ const CartScreen = (props) => {
       }
     }))
   }
+  const handlePressPayMent = () => {
+    dispatch(cartActions.paymentCarts({
+    }, (response) => {
+      if (response?.success) {
+        dispatch(cartActions.getCarts({
+        }, (response) => {
+          Helpers.showMess('Thanh toán thành công', 'success')
+          NavigationHelpers.navigateToScreen(SCREEN_NAME.MainTab)
+        }))
+      }
+    }))
+  }
 
   return (
     <View style={style.Container}>
@@ -166,20 +178,24 @@ const CartScreen = (props) => {
         >
 
           <View>
-            <Text style={{ ...Fonts.bold, fontSize: 17 * rate }}>Tổng tiền:</Text>
+            <Text style={{ ...Fonts.bold, fontSize: 17 * rate }}>
+
+              Tổng tiền:
+            </Text>
           </View>
           <View>
             <Text style={{ fontSize: 17 * rate }}>
 
               {tongTienfnc()}
+              {' '}
               VND
             </Text>
           </View>
 
         </View>
 
-        <TouchableOpacity onPress={{}}>
-          <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
+          <TouchableOpacity onPress={handlePressPayMent}>
             <Animatable.View
               animation="fadeInRight"
               delay={350}
@@ -198,8 +214,8 @@ const CartScreen = (props) => {
                 <Text style={{ ...Fonts.bold, color: '#ffff', fontSize: 17 * rate }}>Thanh toán</Text>
               </View>
             </Animatable.View>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
 
       </View>
     </View>
