@@ -2,13 +2,13 @@ import { combineReducers } from 'redux'
 import userReducer from './user'
 import productReducer from './products'
 import categoryReducer from './categories'
-// import cartReducer from './cart'
+import cartReducer from './carts'
 
 const appReducer = combineReducers({
   user: userReducer,
   products: productReducer,
   categories: categoryReducer,
-  // cart: cartReducer,
+  cart: cartReducer,
 })
 
 const rootReducer = (state, action) => {

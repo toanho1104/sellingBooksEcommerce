@@ -11,7 +11,9 @@ import { images } from '../../../assets/images'
 import { Colors, TextStyles } from '../../../assets/styles'
 import { SCREEN_NAME } from '../../configs'
 import { Helpers, NavigationHelpers } from '../../utils'
-import { userActions, categoryActions, productActions } from '../../redux/actions'
+import {
+  userActions, categoryActions, productActions, cartActions,
+} from '../../redux/actions'
 
 const { width } = Dimensions.get('window')
 const rate = width / 375
@@ -43,8 +45,13 @@ const LoginScreen = (props) => {
                 }, (responseL) => {
                   console.log('loading tai khoan', responseL)
                   if (response?.success) {
-                    Helpers.showMess('Đăng nhập thành công', 'success')
-                    NavigationHelpers.navigateToScreenInTab(SCREEN_NAME.MainTab)
+                    dispatch(cartActions.getCarts({
+                    }, (responseCA) => {
+                      if (responseCA?.success) {
+                        Helpers.showMess('Đăng nhập thành công', 'success')
+                        NavigationHelpers.navigateToScreenInTab(SCREEN_NAME.MainTab)
+                      }
+                    }))
                   }
                 }))
               }

@@ -77,7 +77,7 @@ const TrangChu = () => {
           <FlatList
             style={{}}
             data={products}
-            extraData={products}
+            // extraData={products}
             keyExtractor={(item) => `list-product1-${item?.id}`}
             renderItem={({ item, index }) => {
               return (

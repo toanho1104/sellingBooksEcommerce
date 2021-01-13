@@ -16,6 +16,9 @@ import { images } from '../../../assets/images'
 import { Colors, Fonts } from '../../../assets/styles'
 import { DataItem, SCREEN_NAME } from '../../configs'
 import { Helpers, NavigationHelpers } from '../../utils'
+import {
+  userActions, categoryActions, productActions, cartActions,
+} from '../../redux/actions'
 
 const { width } = Dimensions.get('window')
 const rate = width / 375
@@ -23,10 +26,31 @@ const rate = width / 375
 const ChiTietSP = (props) => {
   const dispatch = useDispatch()
   const currentProduct = props?.route?.params
-  console.log('curen', currentProduct)
+  console.log('curen', currentProduct.id)
+
   const themVaoGioHang = () => {
-    NavigationHelpers.navigateToScreen(SCREEN_NAME.gioHang)
+    dispatch(cartActions.addCarts({
+      id: currentProduct.id,
+      tensanpham: currentProduct.tensanpham,
+      giaban: currentProduct.giaban,
+      imageurl: currentProduct.image,
+      soluong: 1,
+    }, (response) => {
+      if (response?.success) {
+        dispatch(cartActions.getCarts({
+
+        }, (responseCA) => {
+          if (responseCA?.success) {
+            console.log('pppppppppppppppppppppppppppp', response.success)
+            Helpers.showMess('Cập nhât thành công', 'success')
+            NavigationHelpers.navigateToScreen(SCREEN_NAME.gioHang)
+          }
+        }))
+      }
+    }))
+    // NavigationHelpers.navigateToScreen(SCREEN_NAME.gioHang)
   }
+
   return (
     <View style={style.Container}>
       <View style={{

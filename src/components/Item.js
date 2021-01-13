@@ -10,10 +10,15 @@ import {
   TouchableOpacity,
 } from 'react-native'
 import CurrencyInput from 'react-native-currency-input'
+import { useSelector, useDispatch } from 'react-redux'
 import { Fonts, Colors, TextStyles } from '../../assets/styles'
 import { images } from '../../assets/images'
 import { Danhsachsp, SCREEN_NAME } from '../configs'
 import { Helpers, NavigationHelpers } from '../utils'
+
+import {
+  userActions, categoryActions, productActions, cartActions,
+} from '../redux/actions'
 
 const { width } = Dimensions.get('window')
 const rate = width / 375
@@ -26,8 +31,31 @@ const rate = width / 375
 // }
 
 const RenderItemSP = ({ item }) => {
+  const dispatch = useDispatch()
+
+  const themVaoGioHang = () => {
+    dispatch(cartActions.addCarts({
+      id: item.id,
+      tensanpham: item.tensanpham,
+      giaban: item.giaban,
+      imageurl: item.image,
+      soluong: 1,
+    }, (response) => {
+      if (response?.success) {
+        dispatch(cartActions.getCarts({
+
+        }, (responseCA) => {
+          if (responseCA?.success) {
+            Helpers.showMess('Cập nhât thành công', 'success')
+            NavigationHelpers.navigateToScreen(SCREEN_NAME.gioHang)
+          }
+        }))
+      }
+    }))
+    // NavigationHelpers.navigateToScreen(SCREEN_NAME.gioHang)
+  }
+
   const handleViewProductDetail = () => {
-    console.tron.log({ item })
     NavigationHelpers.navigateToScreen(SCREEN_NAME.ChiTietSP, item)
   }
   // const formatedCurrency = new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' })
@@ -123,7 +151,7 @@ const RenderItemSP = ({ item }) => {
           }}
         />
 
-        <TouchableOpacity onPress={{}}>
+        <TouchableOpacity onPress={() => themVaoGioHang(item)}>
           <Image
             source={images.them}
             style={{

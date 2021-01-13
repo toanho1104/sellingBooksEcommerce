@@ -17,8 +17,9 @@ const numColumns = 4
 const calSize = width / numColumns
 const khamPha = () => {
   const categories = useSelector(createSelector((state) => state.categories, (categories) => categories))
+
   const handleViewCategoriesDetail = (item) => {
-    NavigationHelpers.navigateToScreen(SCREEN_NAME.DanhSachSP, { id: item.id })
+    NavigationHelpers.navigateToScreen(SCREEN_NAME.DanhSachSP, { id: item.id, tentheloai: item.tentheloai })
   }
   return (
     <View style={styles.container}>

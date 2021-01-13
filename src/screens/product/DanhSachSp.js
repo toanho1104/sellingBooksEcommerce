@@ -29,6 +29,8 @@ const DanhSachSP = (props) => {
   const { params } = route
   const [idTheLoai, setidTheLoai] = useState(params?.id)
   console.log(idTheLoai)
+  const [tentheloai, settenTheLoai] = useState(params?.tentheloai)
+  console.log(tentheloai)
   const products = useSelector((state) => state.products, (products) => products)
 
   useEffect(() => {
@@ -61,7 +63,12 @@ const DanhSachSP = (props) => {
             resizeMode="contain"
           />
         </TouchableOpacity>
-        <Text style={{ ...Fonts.bold, fontSize: 20 * rate, color: Colors.neutralDark }}>Danh sách sản phẩm</Text>
+        <Text style={{ ...Fonts.bold, fontSize: 20 * rate, color: Colors.neutralDark }}>
+          Danh Muc Sách
+          {' '}
+
+          {tentheloai}
+        </Text>
       </View>
 
       <View style={{ flex: 6, marginTop: 15 * rate, borderwidth: 2 }}>
@@ -77,7 +84,7 @@ const DanhSachSP = (props) => {
           <FlatList
             style={{}}
             data={sanPham}
-            keyExtractor={(item, index) => `listcaata-${index.id === 1}`}
+            keyExtractor={(item, index) => `listcaata-${index}`}
             showsHorizontalScrollIndicator={false}
             numColumns={2}
             renderItem={({ item, index }) => {
