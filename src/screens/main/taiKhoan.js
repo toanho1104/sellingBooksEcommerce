@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import {
   View, StyleSheet, Modal, Dimensions,
   SafeAreaView, TouchableOpacity, Animated, Text, Image,
+  TextInput,
 } from 'react-native'
 
 import FastImage from 'react-native-fast-image'
@@ -24,6 +25,10 @@ const handlePressMoreCategory = () => {
 const dangxuat = () => {
   NavigationHelpers.navigateToScreen(SCREEN_NAME.LoginScreen)
 }
+const handlePressTopK = () => {
+  NavigationHelpers.navigateToScreen(SCREEN_NAME.TopKScreen)
+}
+
 const taiKhoan = (props) => {
   const user = useSelector((state) => state.user, (user) => user)
 
@@ -98,7 +103,8 @@ const taiKhoan = (props) => {
       />
       <ItemMain
         icon={images.diachi}
-        title="Địa chỉ"
+        title="TopK"
+        onPress={handlePressTopK}
       />
       <ItemMain
         icon={images.phuongthucthanhtoan}

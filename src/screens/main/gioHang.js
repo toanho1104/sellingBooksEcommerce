@@ -154,7 +154,7 @@ const CartScreen = (props) => {
                 <TouchableOpacity
                   onPress={() => handlePressDelete(item)}
                 >
-                  <View style={{ flex: 0.1 * rate, borderWidth: 2 }}>
+                  <View style={{ flex: 0.1 * rate, height: 50 }}>
                     <Image source={images.xoa} />
                   </View>
                 </TouchableOpacity>
