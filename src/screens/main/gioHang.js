@@ -8,6 +8,7 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
+  TextInput,
 } from 'react-native'
 import * as Animatable from 'react-native-animatable'
 import FastImage from 'react-native-fast-image'
@@ -25,8 +26,11 @@ const { width } = Dimensions.get('window')
 const rate = width / 375
 
 const CartScreen = (props) => {
+  const [giaban, setgiaban] = useState(__DEV__)
   const cart = useSelector((value) => value.cart)
-  console.tron.log({ cart })
+  const user = useSelector((value) => value.user)
+
+  console.log(user[0].id)
   const dispatch = useDispatch()
 
   const tongTienfnc = () => {
@@ -39,12 +43,13 @@ const CartScreen = (props) => {
 
   const handlePressDelete = (item) => {
     dispatch(cartActions.deleteCarts({
-      id: item.id,
+      id: item.idsanpham,
     }, (response) => {
+      console.log('aaaaaaaaa', item.id)
       if (response?.success) {
         dispatch(cartActions.getCarts({
         }, (response) => {
-          Helpers.showMess('Xoa thanh cong', 'success')
+          Helpers.showMess('Xóa thành công', 'success')
           NavigationHelpers.navigateToScreen(SCREEN_NAME.MainTab)
         }))
       }
@@ -52,6 +57,9 @@ const CartScreen = (props) => {
   }
   const handlePressPayMent = () => {
     dispatch(cartActions.paymentCarts({
+      id: user[0].id,
+      diachi: user[0].diachi,
+      tongtien: tongTienfnc(),
     }, (response) => {
       if (response?.success) {
         dispatch(cartActions.getCarts({
@@ -184,12 +192,15 @@ const CartScreen = (props) => {
             </Text>
           </View>
           <View>
-            <Text style={{ fontSize: 17 * rate }}>
+            <TextInput
+              onChangeText={(text) => setgiaban(text)}
+              style={{ fontSize: 17 * rate }}
+            >
 
               {tongTienfnc()}
               {' '}
               VND
-            </Text>
+            </TextInput>
           </View>
 
         </View>

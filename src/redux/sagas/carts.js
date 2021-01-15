@@ -66,11 +66,12 @@ function* getItemCard(action) {
 function* getPayMentCard(action) {
   const { data, callback } = action?.payload
   const {
-    id, tensanpham, giaban, imageurl, soluong,
+    id, tensanpham, giaban, imageurl, soluong, diachi, tongtien,
   } = data
+  console.log('thanh taonhsssssssss', data)
   try {
     const response = yield call(() => axios.post(`${API_URL}/giohang/thanhtoan`, {
-
+      id, diachi, tongtien,
     }))
     yield put({
       type: cartTypes.GET_PAYMENT_CARTS_SUCCESS,
