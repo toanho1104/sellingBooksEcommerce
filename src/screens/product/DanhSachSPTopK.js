@@ -23,27 +23,26 @@ import { Helpers, NavigationHelpers } from '../../utils'
 const { width } = Dimensions.get('window')
 const rate = width / 375
 
-const DanhSachSP = (props) => {
+const DanhsachSPTopK = (props) => {
   console.tron.log({ props })
   const { route } = props
   const { params } = route
-  const [idTheLoai, setidTheLoai] = useState(params?.id)
-  console.log(idTheLoai)
-  const [tentheloai, settenTheLoai] = useState(params?.tentheloai)
-  // console.log(tentheloai)
-  const products = useSelector((state) => state.products, (products) => products)
+  const [idtopk, setidtopk] = useState(params?.id)
+  console.log(idtopk)
 
+  const topkitem = useSelector((state) => state.topkitem, (topkitem) => topkitem)
+  console.tron.log({ topkitem })
   useEffect(() => {
     if (params?.id) {
-      setidTheLoai(params?.id)
+      setidtopk(params?.id)
       LocSp()
     }
   }, [])
   const [sanPham, setSanPham] = useState()
 
   const LocSp = () => {
-    const a = products.filter((item) => {
-      return item.idtheloai === idTheLoai
+    const a = topkitem.filter((item) => {
+      return item.idtopk === idtopk
     })
     setSanPham(a)
   }
@@ -65,9 +64,7 @@ const DanhSachSP = (props) => {
         </TouchableOpacity>
         <Text style={{ ...Fonts.bold, fontSize: 20 * rate, color: Colors.neutralDark }}>
           Danh Muc Sách
-          {' '}
-
-          {tentheloai}
+          
         </Text>
       </View>
 
@@ -98,9 +95,10 @@ const DanhSachSP = (props) => {
         </Animatable.View>
       </View>
     </View>
+
   )
 }
-export default DanhSachSP
+export default DanhsachSPTopK
 
 const style = StyleSheet.create({
   Container: {

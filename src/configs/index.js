@@ -15,6 +15,8 @@ export const SCREEN_NAME = {
   DanhSachSP: 'DanhSachSP',
   UpdateUserProfile: 'UpdateUserProfile',
   TopKScreen: 'TopKScreen',
+  SanPhamTopK: 'SanPhamTopK',
+  DanhSachSPTopK: 'DanhSachSPTopK',
 
 }
 

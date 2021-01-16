@@ -3,7 +3,7 @@ import { categoryTypes } from '../types'
 
 const initState = []
 
-const productReducer = (state = initState, action) => {
+const categoryReducer = (state = initState, action) => {
   switch (action.type) {
     case categoryTypes.GET_CATEGORIES_SUCCESS:
       return action?.payload?.data?.data
@@ -12,4 +12,4 @@ const productReducer = (state = initState, action) => {
   }
 }
 
-export default productReducer
+export default categoryReducer

@@ -5,21 +5,39 @@ import {
 import Swiper from 'react-native-swiper'
 import FastImage from 'react-native-fast-image'
 import * as Animatable from 'react-native-animatable'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { createSelector } from 'reselect'
 import { images } from '../../../assets/images'
 import { TitleDSSanpham, Item } from '../../components'
 import { DataItem, SCREEN_NAME } from '../../configs'
 import { Colors } from '../../../assets/styles'
-
 import { Helpers, NavigationHelpers } from '../../utils'
+import {
+  userActions, categoryActions, productActions, cartActions, topkActions, topkitemActions,
+} from '../../redux/actions'
 
 const { width } = Dimensions.get('window')
 const rate = width / 375
 
 const TrangChu = () => {
+  const dispatch = useDispatch()
   // const products = useSelector(createSelector((state) => state.products, (products) => products))
   const products = useSelector((state) => state.products, (products) => products)
+  const topk = useSelector((state) => state.topk, (topk) => topk)
+
+  const handlePressTopK = () => {
+    dispatch(topkActions.gettopk({
+
+    }, (response) => {
+      if (response?.success) {
+        dispatch(topkitemActions.getitemtopk({
+
+        }, (response) => {
+          NavigationHelpers.navigateToScreen(SCREEN_NAME.SanPhamTopK)
+        }))
+      }
+    }))
+  }
 
   console.tron.log({ aaaaa: products })
   return (
@@ -90,14 +108,14 @@ const TrangChu = () => {
             showsHorizontalScrollIndicator={false}
           />
         </Animatable.View>
-
-        <View style={{
-          width: 350 * rate,
-        }}
-        >
-          <TitleDSSanpham title="Sản phẩm ngẩu nhiên" />
-        </View>
-
+        <TouchableOpacity onPress={handlePressTopK}>
+          <View style={{
+            width: 350 * rate,
+          }}
+          >
+            <TitleDSSanpham title="Sản phẩm topk" />
+          </View>
+        </TouchableOpacity>
         {/* <Animatable.View
           animation="bounceInUp"
           delay={350}

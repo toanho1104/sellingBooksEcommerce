@@ -1,0 +1,2 @@
+export const GET_ITEM_TOPK = 'GET_ITEM_TOPK'
+export const GET_ITEM_TOPK_SUCCESS = 'GET_TOPK_ITEM_SUCCESS'

@@ -1,79 +1,79 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
-  View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView, Dimensions, FlatList, Image, TextInput,
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+  ScrollView,
+  FlatList,
+  TouchableOpacity,
 } from 'react-native'
-import FastImage from 'react-native-fast-image'
 import * as Animatable from 'react-native-animatable'
+import FastImage from 'react-native-fast-image'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import { images } from '../../../assets/images'
-import { Colors, Fonts, TextStyles } from '../../../assets/styles'
-import { Danhsachsp, SCREEN_NAME } from '../../configs'
+import { Colors, Fonts } from '../../../assets/styles'
+import { DataItem, SCREEN_NAME } from '../../configs'
+import { TitleDSSanpham, Item } from '../../components'
+
 import { Helpers, NavigationHelpers } from '../../utils'
 
 const { width } = Dimensions.get('window')
 const rate = width / 375
 const numColumns = 4
-const calSize = width / numColumns
-const khamPha = () => {
-  const categories = useSelector(createSelector((state) => state.categories, (categories) => categories))
-  console.log(categories)
-  const handleViewCategoriesDetail = (item) => {
-    NavigationHelpers.navigateToScreen(SCREEN_NAME.DanhSachSP, { id: item.id, tentheloai: item.tentheloai })
+const calSize = width / numColumns 
+
+const SanPhamTopK = (props) => {
+  const products = useSelector((state) => state.products, (products) => products)
+  const topk = useSelector(createSelector((state) => state.topk, (topk) => topk))
+
+  const handleViewCategoriesTopK = (item) => {
+    NavigationHelpers.navigateToScreen(SCREEN_NAME.DanhSachSPTopK, { id: item.id, utility: item.utility })
   }
   return (
-    <View style={styles.container}>
+    <View style={style.Container}>
       <View style={{
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 15 * rate,
-        paddingHorizontal: 15 * rate,
-      }}
-      >
-
-        <View style={{
-          height: 50,
-          borderRadius: 15,
-          alignItems: 'center',
-          flexDirection: 'row',
-          backgroundColor: '#DADADA',
-          flex: 1,
-        }}
-        >
-          <Image
-            source={images.timkiem}
-            style={{ width: 25 * rate, height: 25 * rate, marginLeft: 7 * rate }}
-          />
-          <TextInput
-            placeholder="Tìm kiếm sản phẩm"
-            style={{ marginLeft: 10, flex: 1 }}
-          />
-        </View>
-      </View>
-
-      <View style={{
-        paddingHorizontal: 15 * rate,
         borderBottomWidth: 2,
-        borderBottomColor: Colors.neutralLight,
-        marginTop: 10 * rate,
+        width,
+        borderColor: Colors.neutralLight,
+        paddingHorizontal: 5 * rate,
+        height: 70 * rate,
       }}
       >
-        <Text style={{ ...Fonts.bold, fontSize: 18 * rate, color: Colors.neutralDark }}> Danh mục sản phẩm</Text>
+        <TouchableOpacity onPress={NavigationHelpers.navigateBack}>
+          <FastImage
+            source={images.back}
+            style={{
+              width: 37 * rate,
+              height: 37 * rate,
+            }}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+        <Text style={{ ...Fonts.bold, fontSize: 20 * rate, color: Colors.neutralDark }}>
+          Danh mục TopK
+          
+        </Text>
       </View>
 
       <View>
         <FlatList
           style={{ marginBottom: 24, marginTop: 12 }}
           showsHorizontalScrollIndicator={false}
-          data={categories}
-          extraData={categories}
+          data={topk}
+          extraData={topk}
           keyExtractor={(item, index) => `list-categories-${index}`}
           numColumns={numColumns}
           columnWrapperStyle={{ marginBottom: 16 }}
           renderItem={({ item, index }) => {
             console.tron.log({ item })
+            
             return (
-              <TouchableOpacity onPress={() => handleViewCategoriesDetail(item)}>
+              <TouchableOpacity onPress={() => handleViewCategoriesTopK(item)}>
                 <Animatable.View
                   animation="tada"
                   delay={350}
@@ -87,11 +87,11 @@ const khamPha = () => {
                     borderColor: Colors.neutralLight,
                     justifyContent: 'center',
                     alignItems: 'center',
-
+                    
                   }}
                   >
                     <FastImage
-                      source={{ uri: item.imageurl }}
+                      source={images.amnhac}
                       style={{ width: 60 * rate, height: 60 * rate }}
                       resizeMode="contain"
                     />
@@ -106,7 +106,7 @@ const khamPha = () => {
                     height: 30,
                   }}
                   >
-                    {item.tentheloai}
+                    {item.utility}
 
                   </Text>
                 </Animatable.View>
@@ -119,10 +119,17 @@ const khamPha = () => {
     </View>
   )
 }
-export default khamPha
-const styles = StyleSheet.create({
-  container: {
+export default SanPhamTopK
+
+const style = StyleSheet.create({
+  Container: {
     flex: 1,
     backgroundColor: Colors.backgroundWhite,
+  },
+  Borderbottom: {
+    width: 400 * rate,
+    borderBottomWidth: 2,
+    borderBottomColor: '#E2E2E2',
+    // backgroundColor: 'red',
   },
 })

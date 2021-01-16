@@ -4,6 +4,7 @@ import productSaga from './products'
 import categorySaga from './categories'
 import cartsSaga from './carts'
 import topkSaga from './topk'
+import topkitmeSaga from './topkitem'
 
 export default function* rootSaga() {
   yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     categorySaga(),
     cartsSaga(),
     topkSaga(),
+    topkitmeSaga(),
   ])
 }

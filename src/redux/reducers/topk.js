@@ -3,13 +3,13 @@ import { topkTypes } from '../types'
 
 const initState = []
 
-const productReducer = (state = initState, action) => {
+const topkReducer = (state = initState, action) => {
   switch (action.type) {
     case topkTypes.GET_TOPK_SUCCESS:
-      return action?.payload?.data
+      return action?.payload?.data?.data
     default:
       return state
   }
 }
 
-export default productReducer
+export default topkReducer

@@ -13,7 +13,10 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import store from './src/redux/store'
 import { Fonts, Colors } from './assets/styles'
 import {
-  taiKhoan, gioHang, khamPha, trangChu, ThongTinTaiKhoan, SplashScreen, LoginScreen, RegisterScreen, DanhSachSP, ChiTietSP, UpdateUserProfile, TopKScreen,
+  DanhSachSPTopK,
+  taiKhoan,
+  gioHang,
+  khamPha, trangChu, ThongTinTaiKhoan, SplashScreen, LoginScreen, RegisterScreen, DanhSachSP, ChiTietSP, UpdateUserProfile, TopKScreen, SanPhamTopK,
 } from './src/screens'
 import { images } from './assets/images'
 import { SCREEN_NAME } from './src/configs'
@@ -107,6 +110,8 @@ const App = () => {
           <Stack.Screen name={SCREEN_NAME.DanhSachSP} component={DanhSachSP} />
           <Stack.Screen name={SCREEN_NAME.ChiTietSP} component={ChiTietSP} />
           <Stack.Screen name={SCREEN_NAME.TopKScreen} component={TopKScreen} />
+          <Stack.Screen name={SCREEN_NAME.SanPhamTopK} component={SanPhamTopK} />
+          <Stack.Screen name={SCREEN_NAME.DanhSachSPTopK} component={DanhSachSPTopK} />
 
         </Stack.Navigator>
       </NavigationContainer>

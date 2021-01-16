@@ -4,6 +4,7 @@ import productReducer from './products'
 import categoryReducer from './categories'
 import cartReducer from './carts'
 import topkReducer from './topk'
+import topkitemReducer from './topkitem'
 
 const appReducer = combineReducers({
   user: userReducer,
@@ -11,6 +12,8 @@ const appReducer = combineReducers({
   categories: categoryReducer,
   cart: cartReducer,
   topk: topkReducer,
+  topkitem: topkitemReducer,
+
 })
 
 const rootReducer = (state, action) => {

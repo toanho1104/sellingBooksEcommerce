@@ -4,6 +4,8 @@ import gioHang from './main/gioHang'
 import taiKhoan from './main/taiKhoan'
 import DanhSachSP from './product/DanhSachSp'
 import ChiTietSP from './product/ChiTietSp'
+import SanPhamTopK from './product/SanPhamTopK'
+import DanhSachSPTopK from './product/DanhSachSPTopK'
 
 import ThongTinTaiKhoan from './user/ThongTinTaiKhoan'
 import TopKScreen from './user/topkScreen'
@@ -13,5 +15,6 @@ import LoginScreen from './auth/LoginScreen'
 import RegisterScreen from './auth/RegisterScreen'
 
 export {
-  trangChu, khamPha, gioHang, taiKhoan, ThongTinTaiKhoan, SplashScreen, LoginScreen, RegisterScreen, DanhSachSP, ChiTietSP, UpdateUserProfile, TopKScreen,
+  trangChu,
+  khamPha, gioHang, taiKhoan, ThongTinTaiKhoan, SplashScreen, LoginScreen, RegisterScreen, DanhSachSP, ChiTietSP, UpdateUserProfile, TopKScreen, SanPhamTopK, DanhSachSPTopK,
 }
