@@ -122,7 +122,7 @@ const RegisterScreen = (props) => {
             }}
           >
             <Image
-              source={images.matkhau}
+              source={images.taiKhoan}
               style={{ width: 24, height: 24, marginRight: 10 }}
             />
             <TextInput
@@ -239,8 +239,10 @@ const RegisterScreen = (props) => {
           >
             <Image
               // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-              source={images.matkhau}
-              style={{ width: 24, height: 24, marginRight: 10 }}
+              source={images.phone}
+              style={{
+                width: 24, height: 24, marginRight: 10, tintColor: Colors.neutralGrey,
+              }}
             />
             <TextInput
               // secureTextEntry
@@ -268,12 +270,14 @@ const RegisterScreen = (props) => {
             }}
           >
             <Image
-              source={images.matkhau}
-              style={{ width: 24, height: 24, marginRight: 10 }}
+              source={images.diachi}
+              style={{
+                width: 24, height: 24, marginRight: 10, tintColor: Colors.neutralGrey,
+              }}
             />
 
             <TextInput
-              secureTextEntry
+
               // value={passwordUser}
               onChangeText={(text) => setdiachi(text)}
               style={{ color: Colors.neutralGrey, ...TextStyles.bodyNormalTextBold, flex: 1 }}

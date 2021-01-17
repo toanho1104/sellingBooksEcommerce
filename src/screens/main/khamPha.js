@@ -94,6 +94,10 @@ const khamPha = (props) => {
           flex: 1,
         }}
         >
+          <Image
+            source={images.timkiem}
+            style={{ width: 25 * rate, height: 25 * rate, marginLeft: 7 * rate }}
+          />
 
           <TextInput
             onChangeText={(text) => searchFilterFunction(text)}
@@ -101,14 +105,7 @@ const khamPha = (props) => {
             placeholder="Tìm kiếm sản phẩm"
             style={{ marginLeft: 10, flex: 1 }}
           />
-          <TouchableOpacity
-            onPress={{}}
-          >
-            <Image
-              source={images.timkiem}
-              style={{ width: 25 * rate, height: 25 * rate, marginRight: 7 * rate }}
-            />
-          </TouchableOpacity>
+
         </View>
       </View>
 
@@ -139,7 +136,7 @@ const khamPha = (props) => {
                   animation="tada"
                   delay={350}
                   duration={1100}
-                  style={{ alignItems: 'center', width: calSize, height: 80 * rate }}
+                  style={{ alignItems: 'center', width: calSize, height: 85 * rate }}
                 >
                   <View style={{
                     width: 70 * rate,

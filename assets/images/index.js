@@ -18,6 +18,7 @@ const images = {
   back: require('./back.png'),
   dong: require('./close.png'),
   bye: require('./logoutIcon.png'),
+  phone: require('./phone.png'),
   // mua hang
   dacnhantam: require('./dacnhantam.jpg'),
   timkiem: require('./tim.png'),
@@ -31,6 +32,7 @@ const images = {
   sachhay1: require('./sachhay1.jpg'),
   sachhay2: require('./sachhay2.jpg'),
   sachhay3: require('./sachhay3.jpg'),
+  top: require('./top.png'),
   // tim
   amnhac: require('./amnhac.png'),
   amthuc: require('./amthuc.png'),

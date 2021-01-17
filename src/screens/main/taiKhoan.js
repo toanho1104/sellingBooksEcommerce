@@ -8,7 +8,7 @@ import {
 import FastImage from 'react-native-fast-image'
 
 import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { images } from '../../../assets/images'
 import { Colors, Fonts, TextStyles } from '../../../assets/styles'
 import { Helpers, NavigationHelpers } from '../../utils'
@@ -16,6 +16,10 @@ import { SCREEN_NAME } from '../../configs'
 import {
   gioHang, khamPha, trangChu, ThongTinTaiKhoan,
 } from '..'
+
+import {
+  userActions, categoryActions, productActions, cartActions, historyActions,
+} from '../../redux/actions'
 
 const { width } = Dimensions.get('window')
 const rate = width / 375
@@ -25,12 +29,17 @@ const handlePressMoreCategory = () => {
 const dangxuat = () => {
   NavigationHelpers.navigateToScreen(SCREEN_NAME.LoginScreen)
 }
-const handlePressTopK = () => {
-  NavigationHelpers.navigateToScreen(SCREEN_NAME.TopKScreen)
-}
 
 const taiKhoan = (props) => {
   const user = useSelector((state) => state.user, (user) => user)
+  const dispatch = useDispatch()
+  const lichsumuahang = () => {
+    dispatch(historyActions.getHistory({
+
+    }, (response) => {
+      NavigationHelpers.navigateToScreen(SCREEN_NAME.TopKScreen)
+    }))
+  }
 
   // console.log('useSelector', user[0].tentaikhoan)
   const [isShowModalLogout, setIsShowModalLogout] = useState(false)
@@ -103,8 +112,8 @@ const taiKhoan = (props) => {
       />
       <ItemMain
         icon={images.diachi}
-        title="TopK"
-        onPress={handlePressTopK}
+        title="Lịch sử mua hàng"
+        onPress={lichsumuahang}
       />
       <ItemMain
         icon={images.phuongthucthanhtoan}

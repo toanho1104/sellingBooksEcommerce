@@ -91,7 +91,7 @@ const SanPhamTopK = (props) => {
                   }}
                   >
                     <FastImage
-                      source={images.amnhac}
+                      source={images.top}
                       style={{ width: 60 * rate, height: 60 * rate }}
                       resizeMode="contain"
                     />

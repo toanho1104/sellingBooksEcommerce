@@ -33,9 +33,8 @@ const TitleDSSanPham = (props) => {
     }}
     >
       <Text style={{ ...Fonts.regular, fontSize: 18, marginTop: 4 * rate }}>{title}</Text>
-      <TouchableOpacity onPress={vaoChiTietSP}>
-        {/* <Text style={{ color: Colors.neutralGrey, alignItems: 'center' }}>Xem tất cả >> </Text> */}
-      </TouchableOpacity>
+
+      <Text style={{ color: Colors.neutralGrey, alignItems: 'center' }}>Xem thêm >> </Text>
 
     </View>
   )

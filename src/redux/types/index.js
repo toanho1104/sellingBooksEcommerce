@@ -4,6 +4,7 @@ import * as categoryTypes from './categories'
 import * as cartTypes from './carts'
 import * as topkTypes from './topk'
 import * as topkitemTypes from './topkitem'
+import * as historyTypes from './history'
 
 export {
   userTypes,
@@ -12,5 +13,5 @@ export {
   cartTypes,
   topkTypes,
   topkitemTypes,
-
+  historyTypes,
 }

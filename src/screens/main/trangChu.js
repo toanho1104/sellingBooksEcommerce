@@ -25,6 +25,10 @@ const TrangChu = () => {
   const products = useSelector((state) => state.products, (products) => products)
   const topk = useSelector((state) => state.topk, (topk) => topk)
 
+  const handlePressShoping = () => {
+    NavigationHelpers.navigateToScreen(SCREEN_NAME.khamPha)
+  }
+
   const handlePressTopK = () => {
     dispatch(topkActions.gettopk({
 
@@ -77,12 +81,14 @@ const TrangChu = () => {
           </Swiper>
         </View>
 
-        <View style={{
-          width: 350 * rate,
-        }}
-        >
-          <TitleDSSanpham title="Sản phẩm bán chạy nhất" />
-        </View>
+        <TouchableOpacity onPress={handlePressTopK}>
+          <View style={{
+            width: 350 * rate,
+          }}
+          >
+            <TitleDSSanpham title="Sản phẩm topk" />
+          </View>
+        </TouchableOpacity>
 
         <Animatable.View
           animation="bounceInRight"
@@ -108,15 +114,17 @@ const TrangChu = () => {
             showsHorizontalScrollIndicator={false}
           />
         </Animatable.View>
-        <TouchableOpacity onPress={handlePressTopK}>
+
+        <TouchableOpacity onPress={handlePressShoping}>
           <View style={{
             width: 350 * rate,
           }}
           >
-            <TitleDSSanpham title="Sản phẩm topk" />
+            <TitleDSSanpham title="Sản phẩm bán chạy nhất" />
           </View>
         </TouchableOpacity>
-        {/* <Animatable.View
+
+        <Animatable.View
           animation="bounceInUp"
           delay={350}
           duration={1100}
@@ -126,15 +134,20 @@ const TrangChu = () => {
         >
           <FlatList
             style={{}}
-            data={DataItem}
-            keyExtractor={(item, index) => `list-user-${index}`}
-            renderItem={Item}
-            horizontal
-
+            data={products}
+            numColumns={2}
+            // horizontal
+            keyExtractor={(item) => `list-product1-${item?.id}`}
+            renderItem={({ item, index }) => {
+              return (
+                <Item
+                  item={item}
+                />
+              )
+            }}
             showsHorizontalScrollIndicator={false}
-          // numColumns={2}
           />
-        </Animatable.View> */}
+        </Animatable.View>
 
       </ScrollView>
     </View>

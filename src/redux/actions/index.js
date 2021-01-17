@@ -4,6 +4,7 @@ import * as categoryActions from './categories'
 import * as cartActions from './carts'
 import * as topkActions from './topk'
 import * as topkitemActions from './topkitem'
+import * as historyActions from './history'
 
 export {
   userActions,
@@ -12,4 +13,5 @@ export {
   cartActions,
   topkActions,
   topkitemActions,
+  historyActions,
 }
