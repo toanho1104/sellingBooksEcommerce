@@ -8,6 +8,8 @@ export default function* productSaga() {
   yield takeLatest(cartTypes.GET_DELETE_CARTS, getDeleteCart)
   yield takeLatest(cartTypes.GET_ITEM_CARTS, getItemCard)
   yield takeLatest(cartTypes.GET_PAYMENT_CARTS, getPayMentCard)
+  yield takeLatest(cartTypes.GET_PAYMENT_PLUS, getPayMentPlus)
+  yield takeLatest(cartTypes.GET_PAYMENT_MINUS, getPayMentMinus)
 }
 
 function* getCarts(action) {
@@ -68,13 +70,51 @@ function* getPayMentCard(action) {
   const {
     id, tensanpham, giaban, imageurl, soluong, diachi, tongtien,
   } = data
-  console.log('thanh taonhsssssssss', data)
+
   try {
     const response = yield call(() => axios.post(`${API_URL}/giohang/thanhtoan`, {
       id, diachi, tongtien,
     }))
     yield put({
       type: cartTypes.GET_PAYMENT_CARTS_SUCCESS,
+      payload: { data: response?.data },
+    })
+    callback(response?.data)
+  } catch (error) {
+    callback(error?.response?.data)
+  }
+}
+function* getPayMentPlus(action) {
+  const { data, callback } = action?.payload
+  const {
+    id,
+  } = data
+  console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', id)
+  try {
+    const response = yield call(() => axios.post(`${API_URL}/giohang/tangsoluong`, {
+      id,
+    }))
+    yield put({
+      type: cartTypes.GET_PAYMENT_PLUS_SUCCESS,
+      payload: { data: response?.data },
+    })
+    callback(response?.data)
+  } catch (error) {
+    callback(error?.response?.data)
+  }
+}
+function* getPayMentMinus(action) {
+  const { data, callback } = action?.payload
+  const {
+    id,
+  } = data
+  console.log('thanh taonhsssssssss', data)
+  try {
+    const response = yield call(() => axios.post(`${API_URL}/giohang/giamsoluong`, {
+      id,
+    }))
+    yield put({
+      type: cartTypes.GET_PAYMENT_MINUS_SUCCESS,
       payload: { data: response?.data },
     })
     callback(response?.data)

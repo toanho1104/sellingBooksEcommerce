@@ -24,3 +24,15 @@ export const paymentCarts = (data, callback) => {
     payload: { data, callback },
   }
 }
+export const paymentPlus = (data, callback) => {
+  return {
+    type: cartTypes.GET_PAYMENT_PLUS,
+    payload: { data, callback },
+  }
+}
+export const paymentMinus = (data, callback) => {
+  return {
+    type: cartTypes.GET_PAYMENT_MINUS,
+    payload: { data, callback },
+  }
+}

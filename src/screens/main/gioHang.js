@@ -40,12 +40,35 @@ const CartScreen = (props) => {
     }
     return a
   }
+  const handlePressPlus = (item) => {
+    dispatch(cartActions.paymentPlus({
+      id: item.idsanpham,
+    }, (response) => {
+      dispatch(cartActions.getCarts({
+
+      }, ((responseC) => {
+        Helpers.showMess('Thêm thành công', 'success')
+        NavigationHelpers.navigateToScreen(SCREEN_NAME.MainTab)
+      })))
+    }))
+  }
+  const handlePressMinus = (item) => {
+    dispatch(cartActions.paymentMinus({
+      id: item.idsanpham,
+    }, (response) => {
+      dispatch(cartActions.getCarts({
+
+      }, ((responseC) => {
+        Helpers.showMess('Xóa thành công', 'success')
+        NavigationHelpers.navigateToScreen(SCREEN_NAME.MainTab)
+      })))
+    }))
+  }
 
   const handlePressDelete = (item) => {
     dispatch(cartActions.deleteCarts({
       id: item.idsanpham,
     }, (response) => {
-      console.log('aaaaaaaaa', item.id)
       if (response?.success) {
         dispatch(cartActions.getCarts({
         }, (response) => {
@@ -144,7 +167,8 @@ const CartScreen = (props) => {
                     }}
                     resizeMode="contain"
                   />
-                  <View style={{ justifyContent: 'center' }}>
+
+                  <View style={{ justifyContent: 'center', flex: 1 }}>
                     <Text style={{
                       ...Fonts.bold, fontSize: 15 * rate, height: 40 * rate,
                     }}
@@ -158,14 +182,57 @@ const CartScreen = (props) => {
                     </Text>
                   </View>
 
-                </View>
-                <TouchableOpacity
-                  onPress={() => handlePressDelete(item)}
-                >
-                  <View style={{ flex: 0.1 * rate, height: 50 }}>
-                    <Image source={images.xoa} />
+                  <View style={{
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                    borderWidth: 1,
+                    marginVertical: 24 * rate,
+                    borderColor: Colors.neutralLight,
+                    borderRadius: 5,
+                    marginHorizontal: 10,
+                  }}
+                  >
+                    <TouchableOpacity onPress={() => { handlePressMinus(item) }}>
+                      <Image
+                        source={images.giam}
+                        style={{ height: 20 * rate, width: 20 * rate }}
+                      />
+                    </TouchableOpacity>
+
+                    <View style={{
+                      backgroundColor: Colors.neutralLight, width: 27 * rate, alignItems: 'center',
+                    }}
+                    >
+                      <Text style={{ fontSize: 17 }}>{item.soluong}</Text>
+                    </View>
+                    <TouchableOpacity onPress={() => { handlePressPlus(item) }}>
+                      <Image
+                        source={images.tang}
+                        style={{ height: 20 * rate, width: 20 * rate }}
+                      />
+                    </TouchableOpacity>
+
                   </View>
-                </TouchableOpacity>
+
+                </View>
+
+                <View style={{
+                  flex: 0.1 * rate,
+                  height: 50,
+                  alignItems: 'center',
+                  // justifyContent: 'center',
+                  marginTop: -45 * rate,
+                  borderwidth: 2,
+                }}
+                >
+                  <TouchableOpacity
+                    onPress={() => handlePressDelete(item)}
+                    style={{ alignItems: 'center', marginLeft: 7 * rate }}
+                  >
+                    <Image source={images.xoa} />
+                  </TouchableOpacity>
+                </View>
+
               </View>
             )
           }}

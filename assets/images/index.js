@@ -28,6 +28,8 @@ const images = {
   nhatkytrongtu: require('./nhatkytrongtu.jpg'),
   them: require('./add.png'),
   xoa: require('./xoa.png'),
+  tang: require('./tang.png'),
+  giam: require('./giam.png'),
   // kham pha
   sachhay1: require('./sachhay1.jpg'),
   sachhay2: require('./sachhay2.jpg'),
