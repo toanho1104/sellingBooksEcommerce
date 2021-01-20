@@ -6,6 +6,7 @@ import cartReducer from './carts'
 import topkReducer from './topk'
 import topkitemReducer from './topkitem'
 import historyReducer from './history'
+import sanphamtopkReducer from './sanphamtopk'
 
 const appReducer = combineReducers({
   user: userReducer,
@@ -15,6 +16,7 @@ const appReducer = combineReducers({
   topk: topkReducer,
   topkitem: topkitemReducer,
   history: historyReducer,
+  sanphamtopk: sanphamtopkReducer,
 
 })
 

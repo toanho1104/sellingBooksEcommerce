@@ -124,6 +124,7 @@ const taiKhoan = (props) => {
         title="Đăng xuất"
         onPress={handleShowModalLogout}
       />
+
       <Modal
         transparent
         visible={isShowModalLogout}
@@ -214,6 +215,7 @@ const taiKhoan = (props) => {
           </Animated.View>
         </View>
       </Modal>
+
     </View>
 
   )

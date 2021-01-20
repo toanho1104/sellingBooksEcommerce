@@ -17,7 +17,7 @@ import { Danhsachsp, SCREEN_NAME } from '../configs'
 import { Helpers, NavigationHelpers } from '../utils'
 
 import {
-  userActions, categoryActions, productActions, cartActions,
+  userActions, categoryActions, productActions, cartActions, sanphamtopkActions,
 } from '../redux/actions'
 
 const { width } = Dimensions.get('window')
@@ -56,7 +56,11 @@ const RenderItemSP = ({ item }) => {
   }
 
   const handleViewProductDetail = () => {
-    NavigationHelpers.navigateToScreen(SCREEN_NAME.ChiTietSP, item)
+    dispatch(sanphamtopkActions.getsanphamtopk({
+
+    }, (response) => {
+      NavigationHelpers.navigateToScreen(SCREEN_NAME.ChiTietSP, item)
+    }))
   }
   // const formatedCurrency = new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' })
   return (
@@ -142,14 +146,27 @@ const RenderItemSP = ({ item }) => {
         <CurrencyInput
           value={item.giaban}
           precisions={false}
+          editable={false}
           style={{
             marginTop: 8 * rate,
-            marginBottom: 10 * rate,
-            fontSize: 14 * rate,
-            ...Fonts.bold,
+            marginBottom: 8 * rate,
+            fontSize: 13 * rate,
+            ...Fonts.regular,
             color: Colors.primaryBlue,
+            width: 88 * rate,
           }}
         />
+
+        <Text style={{
+
+          fontSize: 14 * rate,
+          ...Fonts.regular,
+          color: Colors.primaryBlue,
+          marginRight: 7 * rate,
+        }}
+        >
+          đ
+        </Text>
 
         <TouchableOpacity onPress={() => themVaoGioHang(item)}>
           <Image

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
+  Modal,
   View,
   Text,
   StyleSheet,
@@ -14,6 +15,7 @@ import * as Animatable from 'react-native-animatable'
 import FastImage from 'react-native-fast-image'
 import { useSelector, useDispatch } from 'react-redux'
 import { createSelector } from 'reselect'
+import CurrencyInput from 'react-native-currency-input'
 import { Helpers, NavigationHelpers } from '../../utils'
 import { images } from '../../../assets/images'
 import { Colors, Fonts } from '../../../assets/styles'
@@ -29,9 +31,21 @@ const CartScreen = (props) => {
   const [giaban, setgiaban] = useState(__DEV__)
   const cart = useSelector((value) => value.cart)
   const user = useSelector((value) => value.user)
+  const [isShowModalLogout, setIsShowModalLogout] = useState(false)
+  const [diachi, setdiachi] = useState(__DEV__)
+  const handleHideModalLogout = () => {
+    setIsShowModalLogout(false)
+  }
 
-  console.log(user[0].id)
+  const handleShowModalLogout = () => {
+    setIsShowModalLogout(true)
+  }
+
   const dispatch = useDispatch()
+
+  const dongy = () => {
+    NavigationHelpers.navigateToScreen(SCREEN_NAME.LoginScreen)
+  }
 
   const tongTienfnc = () => {
     let a = 0
@@ -78,17 +92,19 @@ const CartScreen = (props) => {
       }
     }))
   }
+
   const handlePressPayMent = () => {
     dispatch(cartActions.paymentCarts({
       id: user[0].id,
-      diachi: user[0].diachi,
+      diachi,
       tongtien: tongTienfnc(),
     }, (response) => {
       if (response?.success) {
         dispatch(cartActions.getCarts({
         }, (response) => {
           Helpers.showMess('Thanh toán thành công', 'success')
-          NavigationHelpers.navigateToScreen(SCREEN_NAME.MainTab)
+          NavigationHelpers.navigateToScreenInTab(SCREEN_NAME.MainTab)
+          setIsShowModalLogout(false)
         }))
       }
     }))
@@ -134,7 +150,7 @@ const CartScreen = (props) => {
 
       </View>
 
-      <View style={{ flex: 6 }}>
+      <View style={{ flex: 8 }}>
         <FlatList
           style={{}}
           data={cart}
@@ -170,13 +186,42 @@ const CartScreen = (props) => {
 
                   <View style={{ justifyContent: 'center', flex: 1 }}>
                     <Text style={{
-                      ...Fonts.bold, fontSize: 15 * rate, height: 40 * rate,
+                      ...Fonts.bold, fontSize: 15 * rate,
                     }}
                     >
                       {item.tensanpham}
                     </Text>
-                    <Text style={{ color: '#7C7C7C', fontSize: 15 }}>
+
+                    {/* <CurrencyInput
+                      value={item.giaban}
+                      // precisions={false}
+                      editable={false}
+                      style={{
+                        fontSize: 13 * rate, color: Colors.primaryGreen, height: 30, borderWidth: 2,
+                      }}
+                    /> */}
+
+                    <Text style={{ color: '#7C7C7C', fontSize: 13 }}>
+                      Giá:
+                      {' '}
                       {item.giaban}
+                      {' '}
+                      VND
+                    </Text>
+
+                    {/* <CurrencyInput
+                      value={item.thanhtien}
+                      // precisions={false}
+                      editable={false}
+                      style={{
+                        fontSize: 13 * rate, color: Colors.primaryGreen, height: 30, borderWidth: 2,
+                      }}
+                    /> */}
+
+                    <Text style={{ fontSize: 13, color: Colors.primaryGreen }}>
+                      Tổng:
+                      {' '}
+                      {item.thanhtien}
                       {' '}
                       VND
                     </Text>
@@ -258,8 +303,24 @@ const CartScreen = (props) => {
               Tổng tiền:
             </Text>
           </View>
-          <View>
-            <TextInput
+          <View style={{
+            flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
+          }}
+          >
+            <CurrencyInput
+              value={tongTienfnc()}
+              precisions={false}
+              editable={false}
+              style={{ fontSize: 16 * rate, color: Colors.primaryGreen }}
+            />
+            <View tyle={{ justifyContent: 'center', alignItems: 'center' }}>
+              <Text style={{ ...Fonts.bold, fontSize: 17 * rate, color: Colors.neutralDark }}>
+
+                VND
+              </Text>
+            </View>
+
+            {/* <TextInput
               onChangeText={(text) => setgiaban(text)}
               style={{ fontSize: 17 * rate }}
             >
@@ -267,13 +328,13 @@ const CartScreen = (props) => {
               {tongTienfnc()}
               {' '}
               VND
-            </TextInput>
+            </TextInput> */}
           </View>
 
         </View>
 
         <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
-          <TouchableOpacity onPress={handlePressPayMent}>
+          <TouchableOpacity onPress={handleShowModalLogout}>
             <Animatable.View
               animation="fadeInRight"
               delay={350}
@@ -283,7 +344,7 @@ const CartScreen = (props) => {
                 height: 60 * rate,
                 backgroundColor: '#11942D',
                 borderRadius: 10 * rate,
-                marginTop: 25 * rate,
+                marginTop: 8 * rate,
                 justifyContent: 'center',
                 // alignItems: 'center',
               }}
@@ -296,6 +357,112 @@ const CartScreen = (props) => {
         </View>
 
       </View>
+
+      <Modal
+        transparent
+        visible={isShowModalLogout}
+      >
+        <View style={{
+          backgroundColor: 'rgba(0,0,0,0.7)',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flex: 1,
+        }}
+        >
+          <View style={{
+            width: 330 * rate,
+            height: 250 * rate,
+            backgroundColor: Colors.backgroundWhite,
+            borderRadius: 10 / 375 * width,
+            alignItems: 'center',
+            padding: 10 * rate,
+          }}
+          >
+            <Text style={{ ...Fonts.bold, fontSize: 20 * rate, color: Colors.primaryRed }}>
+              Xác nhận thanh toán!
+            </Text>
+            <Text style={{ ...Fonts.bold, fontSize: 15 * rate, color: Colors.neutralDark }}>
+              Nhập địa chỉ nơi giao hàng
+            </Text>
+            <TextInput
+              onChangeText={(text) => setdiachi(text)}
+              placeholder="Địa chỉ giao hàng"
+              style={{
+                borderWidth: 1, borderRadius: 8 * rate, height: 35 * rate, width: 250 * rate, marginTop: 5 * rate,
+              }}
+            />
+            <View style={{
+              marginTop: 2 * rate, flexDirection: 'row', paddingVertical: 10, justifyContent: 'center', alignItems: 'center',
+            }}
+            >
+              <Image
+                source={images.warning}
+                style={{ width: 35 * rate, height: 35 * rate }}
+              />
+              <Text style={{ flex: 1, fontSize: 11, marginLeft: 5 }}>
+                Đây là bước cuối cùng để hoàn tất mua hàng, và tất nhiên là bạn sẽ không bao giờ nhận được sản phẩm vì hệ thống đang trong giai đoạn thử nghiệm! :))
+                {' '}
+              </Text>
+            </View>
+            <View style={{
+              flexDirection: 'row',
+              marginTop: 10 * rate,
+            }}
+            >
+
+              <TouchableOpacity onPress={handleHideModalLogout}>
+                <View style={{
+                  width: 100 / 375 * width,
+                  height: 40 / 375 * width,
+                  backgroundColor: Colors.primaryRed,
+                  borderRadius: 5 / 375 * width,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+
+                  marginHorizontal: 10,
+                  marginBottom: 10,
+                }}
+                >
+                  <Text style={{
+                    ...Fonts.bold,
+                    fontSize: 15 * rate,
+                    color: Colors.backgroundWhite,
+                  }}
+                  >
+                    Hủy
+                  </Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={handlePressPayMent}>
+                <View style={{
+                  width: 100 / 375 * width,
+                  height: 40 / 375 * width,
+                  backgroundColor: Colors.primaryGreen,
+                  borderRadius: 5 / 375 * width,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+
+                  marginHorizontal: 10,
+                  marginBottom: 10,
+                }}
+                >
+                  <Text style={{
+                    ...Fonts.bold,
+                    fontSize: 15 * rate,
+                    color: Colors.backgroundWhite,
+                  }}
+                  >
+                    Đồng ý
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+          </View>
+        </View>
+
+      </Modal>
     </View>
   )
 }

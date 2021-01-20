@@ -5,6 +5,7 @@ import * as cartActions from './carts'
 import * as topkActions from './topk'
 import * as topkitemActions from './topkitem'
 import * as historyActions from './history'
+import * as sanphamtopkActions from './sanphamtopk'
 
 export {
   userActions,
@@ -14,4 +15,5 @@ export {
   topkActions,
   topkitemActions,
   historyActions,
+  sanphamtopkActions,
 }

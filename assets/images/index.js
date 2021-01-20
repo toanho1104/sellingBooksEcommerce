@@ -30,6 +30,7 @@ const images = {
   xoa: require('./xoa.png'),
   tang: require('./tang.png'),
   giam: require('./giam.png'),
+  warning: require('./warning.png'),
   // kham pha
   sachhay1: require('./sachhay1.jpg'),
   sachhay2: require('./sachhay2.jpg'),

@@ -12,7 +12,7 @@ import { Colors, TextStyles } from '../../../assets/styles'
 import { SCREEN_NAME } from '../../configs'
 import { Helpers, NavigationHelpers } from '../../utils'
 import {
-  userActions, categoryActions, productActions, cartActions,
+  userActions, categoryActions, productActions, cartActions, topkitemActions,
 } from '../../redux/actions'
 
 const { width } = Dimensions.get('window')
@@ -48,6 +48,11 @@ const LoginScreen = (props) => {
                     dispatch(cartActions.getCarts({
                     }, (responseCA) => {
                       if (responseCA?.success) {
+                        dispatch(topkitemActions.getitemtopk({
+
+                        }, (response) => {
+
+                        }))
                         Helpers.showMess('Đăng nhập thành công', 'success')
                         NavigationHelpers.navigateToScreenInTab(SCREEN_NAME.MainTab)
                       }
