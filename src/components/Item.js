@@ -32,7 +32,7 @@ const rate = width / 375
 
 const RenderItemSP = ({ item }) => {
   const dispatch = useDispatch()
-
+  console.log(item)
   const themVaoGioHang = () => {
     dispatch(cartActions.addCarts({
       id: item.id,

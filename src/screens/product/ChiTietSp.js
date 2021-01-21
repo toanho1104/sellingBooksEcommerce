@@ -9,6 +9,8 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native'
+import CurrencyInput from 'react-native-currency-input'
+
 import * as Animatable from 'react-native-animatable'
 import FastImage from 'react-native-fast-image'
 import { useDispatch, useSelector } from 'react-redux'
@@ -28,7 +30,8 @@ const ChiTietSP = (props) => {
   const dispatch = useDispatch()
   const currentProduct = props?.route?.params
   const [idsanphamtopk, setidsanphamtopk] = useState(currentProduct?.id)
-  console.log('curen', idsanphamtopk)
+  console.tron.log({ a: currentProduct?.id })
+  console.tron.log({ sanPham })
 
   useEffect(() => {
     if (currentProduct?.id) {
@@ -40,8 +43,8 @@ const ChiTietSP = (props) => {
   const [sanPham, setSanPham] = useState()
 
   const LocSp = () => {
-    const a = sanphamtopk.filter((item1) => {
-      return item1.idsanpham !== idsanphamtopk
+    const a = sanphamtopk.filter((item) => {
+      return item.idsanpham !== idsanphamtopk
     })
     setSanPham(a)
   }
@@ -127,7 +130,7 @@ const ChiTietSP = (props) => {
                 Tên sách:
               </Text>
               <Text style={{
-                ...Fonts.bold, color: Colors.neutralDark, fontSize: 18 * rate, flex: 2,
+                ...Fonts.bold, color: Colors.neutralDark, fontSize: 18 * rate, flex: 2, marginLeft: 6 * rate,
               }}
               >
                 {currentProduct.tensanpham}
@@ -147,7 +150,7 @@ const ChiTietSP = (props) => {
                 {' '}
               </Text>
               <Text style={{
-                ...Fonts.bold, color: Colors.primaryBlue, fontSize: 15 * rate, flex: 2,
+                ...Fonts.bold, color: Colors.primaryBlue, fontSize: 15 * rate, flex: 2, marginLeft: 6 * rate,
               }}
               >
                 {currentProduct.tentacgia}
@@ -156,6 +159,8 @@ const ChiTietSP = (props) => {
 
             <View style={{
               flexDirection: 'row',
+
+              alignItems: 'center',
             }}
             >
 
@@ -166,12 +171,29 @@ const ChiTietSP = (props) => {
                 Giá bán:
                 {' '}
               </Text>
-              <Text style={{
+              <View style={{ flexDirection: 'row', flex: 2, alignItems: 'center' }}>
+                <CurrencyInput
+                  value={currentProduct.giaban}
+                  precisions={false}
+                  editable={false}
+                  style={{
+                    alignItems: 'center',
+                    fontSize: 17,
+                    height: 40,
+                    color: Colors.primaryGreen,
+                    marginLeft: 0,
+                  }}
+                />
+                <Text style={{ color: Colors.primaryGreen, marginBottom: 5 * rate, fontSize: 15 * rate }}>VND</Text>
+
+              </View>
+              {/* <Text style={{
                 ...Fonts.regular, color: Colors.primaryYellow, fontSize: 15 * rate, flex: 2,
               }}
               >
                 {currentProduct.giaban}
-              </Text>
+              </Text> */}
+
             </View>
 
             <View style={{
@@ -180,7 +202,12 @@ const ChiTietSP = (props) => {
             >
 
               <Text style={{ ...Fonts.regular, fontSize: 15 * rate, flex: 1 }}>Mô tả: </Text>
-              <Text style={{ ...Fonts.regular, fontSize: 15 * rate, flex: 2 }}>{currentProduct.mota}</Text>
+              <Text style={{
+                ...Fonts.regular, fontSize: 15 * rate, flex: 2, marginLeft: 6 * rate,
+              }}
+              >
+                {currentProduct.mota}
+              </Text>
             </View>
           </View>
         </View>
@@ -198,8 +225,9 @@ const ChiTietSP = (props) => {
           style={{ paddingHorizontal: 15 * rate }}
           data={sanPham}
           // extraData={products}
-          keyExtractor={(item) => `list-producttopk-${item?.id}`}
+          keyExtractor={(item) => `list-producttopk2-${item?.id}`}
           renderItem={({ item, index }) => {
+            console.tron.log({ item })
             return (
               <Item
                 item={item}
