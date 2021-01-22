@@ -13,6 +13,7 @@ import * as Animatable from 'react-native-animatable'
 import FastImage from 'react-native-fast-image'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
+import CurrencyInput from 'react-native-currency-input'
 import { images } from '../../../assets/images'
 import { Colors, Fonts } from '../../../assets/styles'
 import { DataItem, SCREEN_NAME } from '../../configs'
@@ -22,7 +23,7 @@ import { Helpers, NavigationHelpers } from '../../utils'
 
 const { width } = Dimensions.get('window')
 const rate = width / 375
-const numColumns = 4
+const numColumns = 3
 const calSize = width / numColumns 
 
 const SanPhamTopK = (props) => {
@@ -81,12 +82,13 @@ const SanPhamTopK = (props) => {
                   style={{ alignItems: 'center', width: calSize }}
                 >
                   <View style={{
-                    width: 70 * rate,
-                    height: 70 * rate,
-                    // borderWidth: StyleSheet.hairlineWidth,
+                    width: 100 * rate,
+                    height: 100 * rate,
+                    borderWidth: StyleSheet.hairlineWidth,
                     borderColor: Colors.neutralLight,
                     justifyContent: 'center',
                     alignItems: 'center',
+                    borderwidth: 2,
                     
                   }}
                   >
@@ -96,7 +98,20 @@ const SanPhamTopK = (props) => {
                       resizeMode="contain"
                     />
                   </View>
-                  <Text style={{
+
+                  <CurrencyInput
+                    value={item.utility}
+                    precisions={false}
+                    editable={false}
+                    style={{
+                      color: Colors.neutralGrey,
+                      marginTop: 8,
+                      width: 75 * rate,
+                      textAlign: 'center',
+                      width: calSize,
+                    }}
+                  />
+                  {/* <Text style={{
                     // ...TextStyles.captionNormalTextRegular,
                     color: Colors.neutralGrey,
                     marginTop: 8,
@@ -108,7 +123,8 @@ const SanPhamTopK = (props) => {
                   >
                     {item.utility}
 
-                  </Text>
+                  </Text> */}
+
                 </Animatable.View>
               </TouchableOpacity>
             )

@@ -20,7 +20,7 @@ import {
 const { width } = Dimensions.get('window')
 const rate = width / 375
 
-const TopKScreen = () => {
+const LichSuDonHang = () => {
   const history = useSelector((state) => state.history, (history) => history)
   console.log('dia chi', history)
   return (
@@ -46,7 +46,7 @@ const TopKScreen = () => {
           />
         </TouchableOpacity>
         <Text style={{ ...Fonts.bold, fontSize: 20 * rate, color: Colors.neutralDark }}>
-          Lịch sử mua hàng
+          Lịch sử đơn hàng
         </Text>
       </View>
 
@@ -82,13 +82,13 @@ const TopKScreen = () => {
                   <View>
                     <Text style={{
                       ...Fonts.bold,
-                      fontSize: 15 * rate,
+                      fontSize: 13 * rate,
                       color: Colors.neutralDark,
                     }}
                     >
                       {item.diachi}
                     </Text>
-                    <Text style={{ fontSize: 10 }}>
+                    <Text>
                       {item.ngaylap}
                     </Text>
                   </View>
@@ -105,7 +105,7 @@ const TopKScreen = () => {
                         fontSize: 13 * rate,
                         ...Fonts.regular,
                         color: Colors.primaryPulple,
-                        width: 100 * rate,
+                        width: 88 * rate,
                       }}
                     />
 
@@ -133,7 +133,7 @@ const TopKScreen = () => {
   )
 }
 
-export default TopKScreen
+export default LichSuDonHang
 
 const styles = StyleSheet.create({
   container: {

@@ -6,3 +6,10 @@ export const getHistory = (data, callback) => {
     payload: { data, callback },
   }
 }
+
+export const getHoadon = (data, callback) => {
+  return {
+    type: historyTypes.GET_HOADON,
+    payload: { data, callback },
+  }
+}

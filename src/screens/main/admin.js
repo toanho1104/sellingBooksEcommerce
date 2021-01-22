@@ -6,7 +6,6 @@ import {
 } from 'react-native'
 
 import FastImage from 'react-native-fast-image'
-
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 import { images } from '../../../assets/images'
@@ -16,39 +15,52 @@ import { SCREEN_NAME } from '../../configs'
 import {
   gioHang, khamPha, trangChu, ThongTinTaiKhoan,
 } from '..'
-
 import {
-  userActions, categoryActions, productActions, cartActions, historyActions,
+  userActions, categoryActions, productActions, cartActions, topkActions, topkitemActions, historyActions,
 } from '../../redux/actions'
 
 const { width } = Dimensions.get('window')
 const rate = width / 375
-const handlePressMoreCategory = () => {
-  NavigationHelpers.navigateToScreen(SCREEN_NAME.ThongTinTaiKhoan)
+
+const handlePressqlsp = () => {
+  NavigationHelpers.navigateToScreen(SCREEN_NAME.QuanLySanPhamScreen)
 }
 
 const dangxuat = () => {
   NavigationHelpers.navigateToScreen(SCREEN_NAME.LoginScreen)
 }
-const capnhatthongtin = () => {
-  NavigationHelpers.navigateToScreen(SCREEN_NAME.UpdateUserProfile)
-}
 
-const taiKhoan = (props) => {
-  const user = useSelector((value) => value.user)
-  // const user = useSelector((state) => state.user, (user) => user)
+const Admin = (props) => {
   const dispatch = useDispatch()
+  const user = useSelector((state) => state.user, (user) => user)
+
+  const [isShowModalLogout, setIsShowModalLogout] = useState(false)
+  const aniShowModal = useRef(new Animated.Value(0)).current
+
   const lichsumuahang = () => {
-    dispatch(historyActions.getHistory({
-      id: user[0].id,
+    dispatch(historyActions.getHoadon({
+
     }, (response) => {
-      NavigationHelpers.navigateToScreen(SCREEN_NAME.TopKScreen)
+      NavigationHelpers.navigateToScreen(SCREEN_NAME.LichSuDonHangScreen)
     }))
   }
 
-  // console.log('useSelector', user[0].tentaikhoan)
-  const [isShowModalLogout, setIsShowModalLogout] = useState(false)
-  const aniShowModal = useRef(new Animated.Value(0)).current
+  const handlePressTopK = () => {
+    dispatch(topkActions.gettopk({
+
+    }, (response) => {
+      if (response?.success) {
+        dispatch(topkitemActions.getitemtopk({
+
+        }, (response) => {
+          NavigationHelpers.navigateToScreen(SCREEN_NAME.SanPhamTopK)
+        }))
+      }
+    }))
+  }
+  const handlePressMoreCategory = () => {
+    NavigationHelpers.navigateToScreen(SCREEN_NAME.ThongTinTaiKhoan)
+  }
 
   const handleShowModalLogout = () => {
     setIsShowModalLogout(true)
@@ -74,41 +86,31 @@ const taiKhoan = (props) => {
   })
   return (
     <View style={styles.container}>
-
       <View style={{
         paddingHorizontal: 15 * rate,
 
       }}
       >
         <View style={{
-          alignItems: 'center', flexDirection: 'row', height: 130 * rate,
+          alignItems: 'center', height: 130 * rate, marginTop: 40 * rate,
         }}
         >
           <View>
             <FastImage
               source={user[0].imageurl ? { uri: user[0].imageurl } : images.imageAvatar}
-              style={{ height: 65 * rate, width: 65 * rate, borderRadius: 30 * rate }}
+              style={{ height: 80 * rate, width: 80 * rate, borderRadius: 30 * rate }}
               resizeMode="cover"
             />
           </View>
-          <View style={{ marginLeft: 15 * rate }}>
+          <View style={{}}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-
               <Text style={{ ...Fonts.bold, fontSize: 20 * rate, color: Colors.neutralDark }}>{user[0].hovaten}</Text>
 
-              <TouchableOpacity onPress={capnhatthongtin}>
-                <FastImage
-                  source={images.doiten}
-                  style={{ width: 20 * rate, height: 20 * rate, marginLeft: 7 * rate }}
-                  resizeMode="cover"
-                />
-              </TouchableOpacity>
-
             </View>
-            <Text style={{ ...Fonts.regular, fontSize: 15 * rate, color: '#7C7C7C' }}>{user[0].email}</Text>
           </View>
         </View>
       </View>
+
       <View style={{
 
         borderBottomWidth: 2,
@@ -121,13 +123,19 @@ const taiKhoan = (props) => {
         onPress={handlePressMoreCategory}
       />
       <ItemMain
-        icon={images.diachi}
-        title="Lịch sử mua hàng"
-        onPress={lichsumuahang}
+        icon={images.topk}
+        title="Nhóm mặt hàng phổ biến"
+        onPress={handlePressTopK}
       />
       <ItemMain
         icon={images.phuongthucthanhtoan}
-        title="Phương thức thanh toán"
+        title="Quản lý sản phẩm"
+        onPress={handlePressqlsp}
+      />
+      <ItemMain
+        icon={images.quanlydonhang}
+        title="Quản lý đơn hàng"
+        onPress={lichsumuahang}
       />
       <ItemMain
         icon={images.dangxuat}
@@ -230,7 +238,7 @@ const taiKhoan = (props) => {
 
   )
 }
-export default taiKhoan
+export default Admin
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -272,6 +280,7 @@ const ItemMain = (props) => {
               style={{
                 height: 25 * rate,
                 width: 25 * rate,
+                tintColor: Colors.primaryGreen,
               }}
               resizeMode="contain"
             />

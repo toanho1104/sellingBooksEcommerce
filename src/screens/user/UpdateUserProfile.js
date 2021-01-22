@@ -17,13 +17,13 @@ const rate = width / 375
 
 const UpdateUserProfile = (props) => {
   const user = useSelector((state) => state.user, (user) => user)
-  const [textInputValue, setTextInputValue] = React.useState('')
+  // const [textInputValue, setTextInputValue] = React.useState('')
 
   const dispatch = useDispatch()
-  const [hovaten, sethovaten] = useState(__DEV__)
-  const [diachi, setdiachi] = useState(__DEV__)
-  const [email, setemail] = useState(__DEV__)
-  const [sodienthoai, setsodienthoai] = useState(__DEV__)
+  const [hovaten, sethovaten] = useState(__DEV__ ? user[0].hovaten : '')
+  const [diachi, setdiachi] = useState(__DEV__ ? user[0].diachi : '')
+  const [email, setemail] = useState(__DEV__ ? user[0].email : '')
+  const [sodienthoai, setsodienthoai] = useState(__DEV__ ? user[0].sodienthoai : '')
   // const [tendangnhap, settendangnhap] = useState(__DEV__)
   const [matkhau, setmatkhau] = useState(__DEV__)
 
@@ -104,6 +104,7 @@ const UpdateUserProfile = (props) => {
         </Text>
         <TextInput
           onChangeText={(text) => sethovaten(text)}
+          value={hovaten}
           style={{
             paddingHorizontal: 15 * rate,
             width: 150 * rate,
@@ -137,6 +138,7 @@ const UpdateUserProfile = (props) => {
         </Text>
         <TextInput
           onChangeText={(text) => setemail(text)}
+          value={email}
           style={{
             paddingHorizontal: 15 * rate,
             width: 150 * rate,
@@ -169,6 +171,7 @@ const UpdateUserProfile = (props) => {
         </Text>
         <TextInput
           onChangeText={(text) => setsodienthoai(text)}
+          value={sodienthoai}
           style={{
             paddingHorizontal: 15 * rate,
             width: 150 * rate,
@@ -201,6 +204,7 @@ const UpdateUserProfile = (props) => {
         </Text>
         <TextInput
           onChangeText={(text) => setdiachi(text)}
+          value={diachi}
           style={{
             paddingHorizontal: 15 * rate,
             width: 150 * rate,
@@ -265,7 +269,7 @@ const UpdateUserProfile = (props) => {
           marginTop: 15 * rate,
         }}
         >
-          <Text style={{ ...Fonts.regular, fontSize: 15 * rate, color: Colors.backgroundWhite }}>Cập nhật</Text>
+          <Text style={{ ...Fonts.regular, fontSize: 15 * rate, color: Colors.backgroundWhite }}>Xác nhận</Text>
         </View>
       </TouchableOpacity>
 

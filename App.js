@@ -17,6 +17,7 @@ import {
   taiKhoan,
   gioHang,
   khamPha, trangChu, ThongTinTaiKhoan, SplashScreen, LoginScreen, RegisterScreen, DanhSachSP, ChiTietSP, UpdateUserProfile, TopKScreen, SanPhamTopK,
+  AdminScreen, LichSuDonHangScreen, QuanLySanPhamScreen, ChiTietSanPhamAdScreen,
 } from './src/screens'
 import { images } from './assets/images'
 import { SCREEN_NAME } from './src/configs'
@@ -101,8 +102,6 @@ const App = () => {
           <Stack.Screen name={SCREEN_NAME.SplashScreen} component={SplashScreen} />
           <Stack.Screen name={SCREEN_NAME.LoginScreen} component={LoginScreen} />
           <Stack.Screen name={SCREEN_NAME.RegisterScreen} component={RegisterScreen} />
-
-          <Stack.Screen name={SCREEN_NAME.MainTab} component={MainTab} />
           <Stack.Screen name={SCREEN_NAME.khamPha} component={khamPha} />
           <Stack.Screen name={SCREEN_NAME.trangChu} component={trangChu} />
           <Stack.Screen name={SCREEN_NAME.ThongTinTaiKhoan} component={ThongTinTaiKhoan} />
@@ -112,6 +111,11 @@ const App = () => {
           <Stack.Screen name={SCREEN_NAME.TopKScreen} component={TopKScreen} />
           <Stack.Screen name={SCREEN_NAME.SanPhamTopK} component={SanPhamTopK} />
           <Stack.Screen name={SCREEN_NAME.DanhSachSPTopK} component={DanhSachSPTopK} />
+          <Stack.Screen name={SCREEN_NAME.AdminScreen} component={AdminScreen} />
+          <Stack.Screen name={SCREEN_NAME.LichSuDonHangScreen} component={LichSuDonHangScreen} />
+          <Stack.Screen name={SCREEN_NAME.QuanLySanPhamScreen} component={QuanLySanPhamScreen} />
+          <Stack.Screen name={SCREEN_NAME.ChiTietSanPhamAdScreen} component={ChiTietSanPhamAdScreen} />
+          <Stack.Screen name={SCREEN_NAME.MainTab} component={MainTab} />
 
         </Stack.Navigator>
       </NavigationContainer>

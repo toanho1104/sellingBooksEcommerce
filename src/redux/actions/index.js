@@ -6,6 +6,7 @@ import * as topkActions from './topk'
 import * as topkitemActions from './topkitem'
 import * as historyActions from './history'
 import * as sanphamtopkActions from './sanphamtopk'
+import * as authorActions from './authors'
 
 export {
   userActions,
@@ -16,4 +17,5 @@ export {
   topkitemActions,
   historyActions,
   sanphamtopkActions,
+  authorActions,
 }

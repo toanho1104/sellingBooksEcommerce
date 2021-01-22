@@ -6,6 +6,7 @@ import * as topkTypes from './topk'
 import * as topkitemTypes from './topkitem'
 import * as historyTypes from './history'
 import * as sanphamtopkTypes from './sanphamtopk'
+import * as authorTypes from './authors'
 
 export {
   userTypes,
@@ -16,4 +17,5 @@ export {
   topkitemTypes,
   historyTypes,
   sanphamtopkTypes,
+  authorTypes,
 }

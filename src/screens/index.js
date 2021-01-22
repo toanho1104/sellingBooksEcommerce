@@ -13,8 +13,13 @@ import UpdateUserProfile from './user/UpdateUserProfile'
 import SplashScreen from './SplashScreen'
 import LoginScreen from './auth/LoginScreen'
 import RegisterScreen from './auth/RegisterScreen'
+import AdminScreen from './main/admin'
+import LichSuDonHangScreen from './admin/LichSuDonHang'
+import QuanLySanPhamScreen from './admin/QuaLySanPham'
+import ChiTietSanPhamAdScreen from './admin/ChiTietSanPhamAd'
 
 export {
   trangChu,
-  khamPha, gioHang, taiKhoan, ThongTinTaiKhoan, SplashScreen, LoginScreen, RegisterScreen, DanhSachSP, ChiTietSP, UpdateUserProfile, TopKScreen, SanPhamTopK, DanhSachSPTopK,
+  LichSuDonHangScreen, khamPha, gioHang, taiKhoan, ThongTinTaiKhoan, SplashScreen, LoginScreen, RegisterScreen, DanhSachSP, ChiTietSP, UpdateUserProfile, TopKScreen, SanPhamTopK, DanhSachSPTopK, AdminScreen,
+  QuanLySanPhamScreen, ChiTietSanPhamAdScreen,
 }

@@ -17,7 +17,10 @@ export const SCREEN_NAME = {
   TopKScreen: 'TopKScreen',
   SanPhamTopK: 'SanPhamTopK',
   DanhSachSPTopK: 'DanhSachSPTopK',
-
+  AdminScreen: 'AdminScreen',
+  LichSuDonHangScreen: 'LichSuDonHangScreen',
+  QuanLySanPhamScreen: 'QuanLySanPhamScreen',
+  ChiTietSanPhamAdScreen: 'ChiTietSanPhamAdScreen',
 }
 
 export const sizeData = [

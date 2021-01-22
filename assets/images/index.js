@@ -45,6 +45,8 @@ const images = {
   thethao: require('./thethao.png'),
   thoitrang: require('./Thoitrang.png'),
   tinhoc: require('./tinhoc.png'),
+  quanlydonhang: require('./quanlydonhang.png'),
+  topk: require('./topk.png'),
 
 }
 export { images }

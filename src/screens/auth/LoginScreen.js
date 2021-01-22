@@ -12,7 +12,7 @@ import { Colors, TextStyles } from '../../../assets/styles'
 import { SCREEN_NAME } from '../../configs'
 import { Helpers, NavigationHelpers } from '../../utils'
 import {
-  userActions, categoryActions, productActions, cartActions, topkitemActions,
+  userActions, categoryActions, productActions, cartActions, topkitemActions, authorActions,
 } from '../../redux/actions'
 
 const { width } = Dimensions.get('window')
@@ -33,30 +33,32 @@ const LoginScreen = (props) => {
       if (response?.success) {
         dispatch(productActions.getProducts({
         }, (responseP) => {
-          console.log('product', responseP)
           if (responseP?.success) {
-            console.log(responseP.success)// dat
             dispatch(categoryActions.getCategorys({
             }, (responseC) => {
-              console.log('load the loai', responseC)
               if (responseC?.success) {
                 dispatch(userActions.loadingProfileUser({
                   tendangnhap: emailUser,
                 }, (responseL) => {
-                  console.log('loading tai khoan', responseL)
-                  if (response?.success) {
+                  console.tron.log({ aaa: responseL.data[0].loaitaikhoan })
+
+                  if (responseL.data[0].loaitaikhoan === 2) {
                     dispatch(cartActions.getCarts({
                     }, (responseCA) => {
                       if (responseCA?.success) {
                         dispatch(topkitemActions.getitemtopk({
-
                         }, (response) => {
-
                         }))
                         Helpers.showMess('Đăng nhập thành công', 'success')
-                        NavigationHelpers.navigateToScreenInTab(SCREEN_NAME.MainTab)
+                        NavigationHelpers.navigateToScreen(SCREEN_NAME.MainTab)
                       }
                     }))
+                  } else {
+                    dispatch(authorActions.getAuthor({
+
+                    }, (response) => { }))
+                    Helpers.showMess('Xác nhận quản lý thành công', 'success')
+                    NavigationHelpers.navigateToScreen(SCREEN_NAME.AdminScreen)
                   }
                 }))
               }

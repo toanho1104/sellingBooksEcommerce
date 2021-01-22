@@ -7,6 +7,7 @@ import topkSaga from './topk'
 import topkitmeSaga from './topkitem'
 import historySaga from './history'
 import sanphamtopkSaga from './sanphamtopk'
+import authorSaga from './authors'
 
 export default function* rootSaga() {
   yield all([
@@ -18,5 +19,6 @@ export default function* rootSaga() {
     topkitmeSaga(),
     historySaga(),
     sanphamtopkSaga(),
+    authorSaga(),
   ])
 }

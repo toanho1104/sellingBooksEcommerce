@@ -16,13 +16,19 @@ import { SCREEN_NAME } from '../../configs'
 import {
   userActions, categoryActions, productActions, cartActions, topkActions,
 } from '../../redux/actions'
+import { TitleDSSanpham, Itemad, Item } from '../../components'
 
 const { width } = Dimensions.get('window')
 const rate = width / 375
 
-const TopKScreen = () => {
-  const history = useSelector((state) => state.history, (history) => history)
-  console.log('dia chi', history)
+const QuanLySanPham = (item) => {
+  const products = useSelector((value) => value.products)
+  // const products = useSelector((state) => state.products, (products) => products)
+  const handlerChitietsanpham = () => {
+    NavigationHelpers.navigateToScreen(SCREEN_NAME.ChiTietSanPhamAdScreen, { item })
+    console.tron.log({ aaaaaaaa: item })
+  }
+
   return (
     <View style={styles.container}>
       <View style={{
@@ -46,7 +52,7 @@ const TopKScreen = () => {
           />
         </TouchableOpacity>
         <Text style={{ ...Fonts.bold, fontSize: 20 * rate, color: Colors.neutralDark }}>
-          Lịch sử mua hàng
+          Quản Lý Sản Phẩm
         </Text>
       </View>
 
@@ -62,66 +68,15 @@ const TopKScreen = () => {
         >
           <FlatList
             style={{}}
-            data={history}
+            data={products}
             keyExtractor={(item, index) => `listcaata-${index}`}
             showsHorizontalScrollIndicator={false}
             renderItem={({ item, index }) => {
+              console.tron.log({ item })
               return (
-                <View style={{
-                  borderWidth: 1,
-                  marginTop: 15 * rate,
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  flexDirection: 'row',
-                  paddingHorizontal: 15 * rate,
-                  borderRadius: 8 * rate,
-                  borderColor: Colors.neutralLight,
-                }}
-                >
-
-                  <View>
-                    <Text style={{
-                      ...Fonts.bold,
-                      fontSize: 15 * rate,
-                      color: Colors.neutralDark,
-                    }}
-                    >
-                      {item.diachi}
-                    </Text>
-                    <Text style={{ fontSize: 10 }}>
-                      {item.ngaylap}
-                    </Text>
-                  </View>
-
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-
-                    <CurrencyInput
-                      value={item.tongtien}
-                      precisions={false}
-                      editable={false}
-                      style={{
-                        marginTop: 8 * rate,
-                        marginBottom: 8 * rate,
-                        fontSize: 13 * rate,
-                        ...Fonts.regular,
-                        color: Colors.primaryPulple,
-                        width: 100 * rate,
-                      }}
-                    />
-
-                    <Text style={{
-                      ...Fonts.bold,
-                      color: Colors.primaryPulple,
-                      fontSize: 14 * rate,
-                      marginBottom: 2,
-                    }}
-                    >
-                      VND
-                    </Text>
-
-                  </View>
-
-                </View>
+                <Itemad
+                  item={item}
+                />
               )
             }}
           />
@@ -133,7 +88,7 @@ const TopKScreen = () => {
   )
 }
 
-export default TopKScreen
+export default QuanLySanPham
 
 const styles = StyleSheet.create({
   container: {
