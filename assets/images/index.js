@@ -47,6 +47,8 @@ const images = {
   tinhoc: require('./tinhoc.png'),
   quanlydonhang: require('./quanlydonhang.png'),
   topk: require('./topk.png'),
+  new: require('./new.png'),
+  noimage: require('./noimage.png'),
 
 }
 export { images }

@@ -9,9 +9,10 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
+  TextInput,
+
 } from 'react-native'
 import CurrencyInput from 'react-native-currency-input'
-
 import * as Animatable from 'react-native-animatable'
 import FastImage from 'react-native-fast-image'
 import { useDispatch, useSelector } from 'react-redux'
@@ -28,10 +29,22 @@ const { width } = Dimensions.get('window')
 const rate = width / 375
 
 const ChiTietSP = (props) => {
+  const author = useSelector((state) => state.author, (author) => author)
+
+  const [selectedValue, setSelectedValue] = useState('java')
   const dispatch = useDispatch()
   const currentProduct = props?.route?.params
+  const gia = currentProduct.giaban
+
+  const [tensach, settensach] = useState(__DEV__ ? currentProduct.tensanpham : '')
+  const [giaban, setgiaban] = useState(__DEV__ ? gia.toString() : '')
+  const [tacgia, settacgia] = useState(__DEV__ ? currentProduct.idtacgia : '')
+  const [theloai, settheloai] = useState(__DEV__ ? currentProduct.idtheloai : '')
+  const [mota, setmota] = useState(__DEV__ ? currentProduct.mota : '')
+  const [image, setimage] = useState(__DEV__ ? currentProduct.image : '')
+
   const [idsanphamtopk, setidsanphamtopk] = useState(currentProduct?.id)
-  console.tron.log({ sanPham })
+
   const [isShowModalLogout, setIsShowModalLogout] = useState(false)
   const handleHideModalLogout = () => {
     setIsShowModalLogout(false)
@@ -39,6 +52,39 @@ const ChiTietSP = (props) => {
 
   const handleShowModalLogout = () => {
     setIsShowModalLogout(true)
+  }
+
+  const [isShowModalUpdateLogout, setIsShowModalUpdateLogout] = useState(false)
+  const handleHideModalUpdateLogout = () => {
+    setIsShowModalUpdateLogout(false)
+  }
+
+  const handleShowModalUpdateLogout = () => {
+    setIsShowModalUpdateLogout(true)
+  }
+
+  const handleUpdateITem = () => {
+    dispatch(productActions.updateProducts({
+      id: currentProduct.id,
+      tensanpham: tensach,
+      giaban,
+      idtacgia: tacgia,
+      idtheloai: theloai,
+      mota,
+      image,
+    }, (response) => {
+      if (response?.success) {
+        dispatch(productActions.getProducts({
+
+        }, (responseP) => {
+          if (responseP?.success) {
+            Helpers.showMess('Cập nhật phẩm thành công', 'success')
+            NavigationHelpers.navigateToScreen(SCREEN_NAME.QuanLySanPhamScreen)
+            setIsShowModalLogout(false)
+          }
+        }))
+      }
+    }))
   }
 
   const handleDeleteitem = () => {
@@ -109,7 +155,7 @@ const ChiTietSP = (props) => {
         <View style={{ marginTop: 15 * rate }}>
 
           <View style={{ alignItems: 'center' }}>
-            <FastImage
+            <Image
               source={{ uri: currentProduct.image }}
               style={{ width: 200, height: 200 }}
               resizeMode="contain"
@@ -217,7 +263,7 @@ const ChiTietSP = (props) => {
         </View>
 
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-          <TouchableOpacity onPress={{}}>
+          <TouchableOpacity onPress={handleShowModalUpdateLogout}>
             <View
               style={{
                 width: 100 * rate,
@@ -317,6 +363,258 @@ const ChiTietSP = (props) => {
               </TouchableOpacity>
 
               <TouchableOpacity onPress={handleDeleteitem}>
+                <View style={{
+                  width: 100 / 375 * width,
+                  height: 40 / 375 * width,
+                  backgroundColor: Colors.primaryGreen,
+                  borderRadius: 5 / 375 * width,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+
+                  marginHorizontal: 10,
+                  marginBottom: 10,
+                }}
+                >
+                  <Text style={{
+                    ...Fonts.bold,
+                    fontSize: 15 * rate,
+                    color: Colors.backgroundWhite,
+                  }}
+                  >
+                    Đồng ý
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+          </View>
+        </View>
+
+      </Modal>
+
+      <Modal
+        transparent
+        visible={isShowModalUpdateLogout}
+      >
+        <View style={{
+          backgroundColor: 'rgba(0,0,0,0.7)',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flex: 1,
+        }}
+        >
+          <View style={{
+            width: 320 * rate,
+            height: 500 * rate,
+            backgroundColor: Colors.backgroundWhite,
+            borderRadius: 10 / 375 * width,
+            alignItems: 'center',
+            padding: 15 * rate,
+            justifyContent: 'center',
+
+          }}
+          >
+
+            <Text style={{
+              ...Fonts.bold, fontSize: 20 * rate, color: Colors.primaryRed,
+            }}
+            >
+              Cập nhật sản phẩm
+            </Text>
+
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 5 * rate }}>
+              <Text style={{
+                flex: 1,
+                ...Fonts.regular,
+                color: Colors.neutralDark,
+                fontSize: 15 * rate,
+              }}
+              >
+                Tên sách
+              </Text>
+              <TextInput
+                onChangeText={(text) => settensach(text)}
+                value={tensach}
+                style={{
+                  paddingHorizontal: 15 * rate,
+                  ...Fonts.regular,
+                  color: Colors.primaryPulple,
+                  fontSize: 15 * rate,
+                  alignItems: 'center',
+                  flex: 2,
+                  borderWidth: 1,
+                  borderRadius: 15 * rate,
+                  borderColor: Colors.neutralGrey,
+                }}
+              />
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 5 * rate }}>
+              <Text style={{
+                flex: 1,
+                ...Fonts.regular,
+                color: Colors.neutralDark,
+                fontSize: 15 * rate,
+              }}
+              >
+                Giá bán
+              </Text>
+              <TextInput
+                onChangeText={(text) => setgiaban(text)}
+                value={giaban}
+                style={{
+                  paddingHorizontal: 15 * rate,
+                  ...Fonts.regular,
+                  color: Colors.primaryPulple,
+                  fontSize: 15 * rate,
+                  alignItems: 'center',
+                  flex: 2,
+                  borderWidth: 1,
+                  borderRadius: 15 * rate,
+                  borderColor: Colors.neutralGrey,
+                }}
+              />
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 5 * rate }}>
+              <Text style={{
+                flex: 1,
+                ...Fonts.regular,
+                color: Colors.neutralDark,
+                fontSize: 15 * rate,
+              }}
+              >
+                Tác giả
+              </Text>
+              <TextInput
+                onChangeText={(text) => settacgia(text)}
+                value={tacgia}
+                style={{
+                  paddingHorizontal: 15 * rate,
+
+                  ...Fonts.regular,
+                  color: Colors.primaryPulple,
+                  fontSize: 15 * rate,
+                  alignItems: 'center',
+                  flex: 2,
+                  borderWidth: 1,
+                  borderRadius: 15 * rate,
+                  borderColor: Colors.neutralGrey,
+                }}
+              />
+
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 5 * rate }}>
+              <Text style={{
+                flex: 1,
+                ...Fonts.regular,
+                color: Colors.neutralDark,
+                fontSize: 15 * rate,
+              }}
+              >
+                Thể loại
+              </Text>
+              <TextInput
+                onChangeText={(text) => settheloai(text)}
+                value={theloai}
+                style={{
+                  paddingHorizontal: 15 * rate,
+
+                  ...Fonts.regular,
+                  color: Colors.primaryPulple,
+                  fontSize: 15 * rate,
+                  alignItems: 'center',
+                  flex: 2,
+                  borderWidth: 1,
+                  borderRadius: 15 * rate,
+                  borderColor: Colors.neutralGrey,
+                }}
+              />
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 5 * rate }}>
+              <Text style={{
+                flex: 1,
+                ...Fonts.regular,
+                color: Colors.neutralDark,
+                fontSize: 15 * rate,
+              }}
+              >
+                Mô tả
+              </Text>
+              <TextInput
+                onChangeText={(text) => setmota(text)}
+                value={mota}
+                style={{
+                  paddingHorizontal: 15 * rate,
+
+                  ...Fonts.regular,
+                  color: Colors.primaryPulple,
+                  fontSize: 15 * rate,
+                  alignItems: 'center',
+                  flex: 2,
+                  borderWidth: 1,
+                  borderRadius: 15 * rate,
+                  borderColor: Colors.neutralGrey,
+                }}
+              />
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 5 * rate }}>
+              <Text style={{
+                flex: 1,
+                ...Fonts.regular,
+                color: Colors.neutralDark,
+                fontSize: 15 * rate,
+              }}
+              >
+                Ảnh bìa
+              </Text>
+              <TextInput
+                onChangeText={(text) => setimage(text)}
+                value={image}
+                style={{
+                  paddingHorizontal: 15 * rate,
+
+                  ...Fonts.regular,
+                  color: Colors.primaryPulple,
+                  fontSize: 15 * rate,
+                  alignItems: 'center',
+                  flex: 2,
+                  borderWidth: 1,
+                  borderRadius: 15 * rate,
+                  borderColor: Colors.neutralGrey,
+                }}
+              />
+            </View>
+
+            <View style={{
+              flexDirection: 'row',
+              marginTop: 30 * rate,
+            }}
+            >
+
+              <TouchableOpacity onPress={handleHideModalUpdateLogout}>
+                <View style={{
+                  width: 100 / 375 * width,
+                  height: 40 / 375 * width,
+                  backgroundColor: Colors.primaryRed,
+                  borderRadius: 5 / 375 * width,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+
+                  marginHorizontal: 10,
+                  marginBottom: 10,
+                }}
+                >
+                  <Text style={{
+                    ...Fonts.bold,
+                    fontSize: 15 * rate,
+                    color: Colors.backgroundWhite,
+                  }}
+                  >
+                    Hủy
+                  </Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={handleUpdateITem}>
                 <View style={{
                   width: 100 / 375 * width,
                   height: 40 / 375 * width,

@@ -105,7 +105,7 @@ const ChiTietSP = (props) => {
         <View style={{ marginTop: 15 * rate }}>
 
           <View style={{ alignItems: 'center' }}>
-            <FastImage
+            <Image
               source={{ uri: currentProduct.image }}
               style={{ width: 200, height: 200 }}
               resizeMode="contain"
