@@ -15,7 +15,7 @@ const { width } = Dimensions.get('window')
 const rate = width / 375
 
 const ThongTinTaiKhoan = () => {
-  const user = useSelector((state) => state.user, (user) => user)
+  const user = useSelector((state) => state.user)
   const handlePressUpdateProfile = () => {
     NavigationHelpers.navigateToScreen(SCREEN_NAME.UpdateUserProfile)
   }

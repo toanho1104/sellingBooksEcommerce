@@ -81,40 +81,6 @@ const TrangChu = () => {
           </Swiper>
         </View>
 
-        <TouchableOpacity onPress={handlePressTopK}>
-          <View style={{
-            width: 350 * rate,
-          }}
-          >
-            <TitleDSSanpham title="Sản phẩm topk" />
-          </View>
-        </TouchableOpacity>
-
-        <Animatable.View
-          animation="bounceInRight"
-          delay={350}
-          duration={1100}
-          style={{
-            width: 350 * rate,
-          }}
-        >
-          <FlatList
-            style={{}}
-            data={products}
-            // extraData={products}
-            keyExtractor={(item) => `list-product1-${item?.id}`}
-            renderItem={({ item, index }) => {
-              return (
-                <Item
-                  item={item}
-                />
-              )
-            }}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
-        </Animatable.View>
-
         <TouchableOpacity onPress={handlePressShoping}>
           <View style={{
             width: 350 * rate,

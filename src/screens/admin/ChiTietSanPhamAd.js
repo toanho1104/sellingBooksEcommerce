@@ -10,7 +10,7 @@ import {
   FlatList,
   TouchableOpacity,
   TextInput,
-
+  Picker,
 } from 'react-native'
 import CurrencyInput from 'react-native-currency-input'
 import * as Animatable from 'react-native-animatable'
@@ -29,17 +29,18 @@ const { width } = Dimensions.get('window')
 const rate = width / 375
 
 const ChiTietSP = (props) => {
-  const author = useSelector((state) => state.author, (author) => author)
+  const [selectedValue, setSelectedValue] = useState('1')
+  const [selectedValue1, setSelectedValue1] = useState('1')
+  // const author = useSelector((state) => state.author, (author) => author)
 
-  const [selectedValue, setSelectedValue] = useState('java')
   const dispatch = useDispatch()
   const currentProduct = props?.route?.params
   const gia = currentProduct.giaban
 
   const [tensach, settensach] = useState(__DEV__ ? currentProduct.tensanpham : '')
   const [giaban, setgiaban] = useState(__DEV__ ? gia.toString() : '')
-  const [tacgia, settacgia] = useState(__DEV__ ? currentProduct.idtacgia : '')
-  const [theloai, settheloai] = useState(__DEV__ ? currentProduct.idtheloai : '')
+  // const [tacgia, settacgia] = useState(__DEV__ ? currentProduct.idtacgia : '')
+  // const [theloai, settheloai] = useState(__DEV__ ? currentProduct.idtheloai : '')
   const [mota, setmota] = useState(__DEV__ ? currentProduct.mota : '')
   const [image, setimage] = useState(__DEV__ ? currentProduct.image : '')
 
@@ -68,8 +69,8 @@ const ChiTietSP = (props) => {
       id: currentProduct.id,
       tensanpham: tensach,
       giaban,
-      idtacgia: tacgia,
-      idtheloai: theloai,
+      idtacgia: selectedValue,
+      idtheloai: selectedValue1,
       mota,
       image,
     }, (response) => {
@@ -79,7 +80,7 @@ const ChiTietSP = (props) => {
         }, (responseP) => {
           if (responseP?.success) {
             Helpers.showMess('Cập nhật phẩm thành công', 'success')
-            NavigationHelpers.navigateToScreen(SCREEN_NAME.QuanLySanPhamScreen)
+            NavigationHelpers.navigateToScreen(SCREEN_NAME.AdminScreen)
             setIsShowModalLogout(false)
           }
         }))
@@ -97,7 +98,7 @@ const ChiTietSP = (props) => {
         }, (responsP) => {
           if (responsP?.success) {
             Helpers.showMess('Xóa sản phẩm thành công', 'success')
-            NavigationHelpers.navigateToScreen(SCREEN_NAME.QuanLySanPhamScreen)
+            NavigationHelpers.navigateToScreen(SCREEN_NAME.AdminScreen)
             setIsShowModalLogout(false)
           }
         }))
@@ -484,7 +485,57 @@ const ChiTietSP = (props) => {
               >
                 Tác giả
               </Text>
-              <TextInput
+              <View style={{
+                paddingHorizontal: 15 * rate,
+
+                ...Fonts.regular,
+                color: Colors.primaryPulple,
+                fontSize: 15 * rate,
+                alignItems: 'center',
+                flex: 2,
+                borderWidth: 1,
+                borderRadius: 15 * rate,
+                borderColor: Colors.neutralGrey,
+              }}
+              >
+                <Picker
+                  selectedValue={selectedValue}
+                  style={{
+                    height: 50,
+                    width: 200,
+                    ...Fonts.regular,
+                    color: Colors.primaryPulple,
+                    fontSize: 15 * rate,
+                    alignItems: 'center',
+
+                    borderWidth: 1,
+                    borderRadius: 15 * rate,
+                    borderColor: Colors.neutralGrey,
+                  }}
+                  onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                >
+
+                  <Picker.Item
+                    label="Ngô Tất Tố"
+                    value="1"
+                  />
+                  <Picker.Item
+                    label="Jim Erickson"
+                    value="2"
+                  />
+                  <Picker.Item
+                    label="Jim Erickson"
+                    value="3"
+                  />
+                  <Picker.Item
+                    label="Lưu Văn Thông"
+                    value="4"
+                  />
+                  <Picker.Item label="Nam Cao" value="5" />
+                  <Picker.Item label="Kim Lân" value="6" />
+                </Picker>
+              </View>
+              {/* <TextInput
                 onChangeText={(text) => settacgia(text)}
                 value={tacgia}
                 style={{
@@ -499,7 +550,7 @@ const ChiTietSP = (props) => {
                   borderRadius: 15 * rate,
                   borderColor: Colors.neutralGrey,
                 }}
-              />
+              /> */}
 
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 5 * rate }}>
@@ -512,7 +563,54 @@ const ChiTietSP = (props) => {
               >
                 Thể loại
               </Text>
-              <TextInput
+
+              <View style={{
+                paddingHorizontal: 15 * rate,
+
+                ...Fonts.regular,
+                color: Colors.primaryPulple,
+                fontSize: 15 * rate,
+                alignItems: 'center',
+                flex: 2,
+                borderWidth: 1,
+                borderRadius: 15 * rate,
+                borderColor: Colors.neutralGrey,
+              }}
+              >
+                <Picker
+                  selectedValue={selectedValue1}
+                  style={{
+                    height: 50,
+                    width: 200,
+                    ...Fonts.regular,
+                    color: Colors.primaryPulple,
+                    fontSize: 15 * rate,
+                    alignItems: 'center',
+
+                    borderWidth: 1,
+                    borderRadius: 15 * rate,
+                    borderColor: Colors.neutralGrey,
+                  }}
+                  onValueChange={(itemValue, itemIndex) => setSelectedValue1(itemValue)}
+                >
+
+                  <Picker.Item
+                    label="Thể thao"
+                    value="1"
+                  />
+                  <Picker.Item
+                    label="Văn học"
+                    value="2"
+                  />
+                  <Picker.Item
+                    label="Tin học"
+                    value="3"
+                  />
+
+                </Picker>
+              </View>
+
+              {/* <TextInput
                 onChangeText={(text) => settheloai(text)}
                 value={theloai}
                 style={{
@@ -527,7 +625,7 @@ const ChiTietSP = (props) => {
                   borderRadius: 15 * rate,
                   borderColor: Colors.neutralGrey,
                 }}
-              />
+              /> */}
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 5 * rate }}>
               <Text style={{

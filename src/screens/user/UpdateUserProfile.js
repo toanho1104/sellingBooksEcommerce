@@ -43,7 +43,7 @@ const UpdateUserProfile = (props) => {
         }, (responseL) => {
           if (responseL?.success) {
             Helpers.showMess('Cập nhật thông tin thành công', 'success')
-            NavigationHelpers.navigateToScreenInTab(SCREEN_NAME.MainTab)
+            NavigationHelpers.navigateToScreen(SCREEN_NAME.ThongTinTaiKhoan)
           }
         }))
       } else {

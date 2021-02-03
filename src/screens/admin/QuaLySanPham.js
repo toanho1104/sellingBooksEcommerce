@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
+  Picker,
   Modal,
   View,
   Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView, Dimensions, FlatList, Image, TextInput,
@@ -23,22 +24,59 @@ import { TitleDSSanpham, Itemad, Item } from '../../components'
 const { width } = Dimensions.get('window')
 const rate = width / 375
 
-const QuanLySanPham = (item) => {
+const QuanLySanPham = (props) => {
   const dispatch = useDispatch()
+
+  const [selectedValue, setSelectedValue] = useState('1')
+  const [selectedValue1, setSelectedValue1] = useState('1')
+  const [search, setSearch] = useState('')
+  const [filteredDataSource, setFilteredDataSource] = useState([])
+  const [masterDataSource, setMasterDataSource] = useState([])
+
   const [tensach, settensach] = useState(__DEV__)
   const [giaban, setgiaban] = useState(__DEV__)
-  const [tacgia, settacgia] = useState(__DEV__)
-  const [theloai, settheloai] = useState(__DEV__)
+  // const [tacgia, settacgia] = useState(__DEV__)
+  // const [theloai, settheloai] = useState(__DEV__)
   const [mota, setmota] = useState(__DEV__)
   const [image, setimage] = useState(__DEV__)
+
+  useEffect(() => {
+    setMasterDataSource(products)
+    // setFilteredDataSource(products)
+  })
+
+  const searchFilterFunction = (text) => {
+    // Check if searched text is not blank
+    if (text) {
+      // Inserted text is not blank
+      // Filter the masterDataSource
+      // Update FilteredDataSource
+      const newData = masterDataSource.filter(
+        (item) => {
+          const itemData = item.tensanpham
+            ? item.tensanpham.toUpperCase()
+            : ''.toUpperCase()
+          const textData = text.toUpperCase()
+          return itemData.indexOf(textData) > -1
+        }
+      )
+      setFilteredDataSource(newData)
+      setSearch(text)
+    } else {
+      // Inserted text is blank
+      // Update FilteredDataSource with masterDataSource
+      setFilteredDataSource(masterDataSource)
+      setSearch(text)
+    }
+  }
 
   const handladdteITem = () => {
     dispatch(productActions.addProducts({
 
       tensanpham: tensach,
       giaban,
-      idtacgia: tacgia,
-      idtheloai: theloai,
+      idtacgia: selectedValue,
+      idtheloai: selectedValue1,
       mota,
       image,
     }, (response) => {
@@ -47,8 +85,8 @@ const QuanLySanPham = (item) => {
 
         }, (responseP) => {
           if (responseP?.success) {
-            Helpers.showMess('Cập nhật phẩm thành công', 'success')
-            NavigationHelpers.navigateToScreen(SCREEN_NAME.QuanLySanPhamScreen)
+            Helpers.showMess('Thêm thành công', 'success')
+            NavigationHelpers.navigateToScreen(SCREEN_NAME.AdminScreen)
             setIsShowModalUpdateLogout(false)
           }
         }))
@@ -97,7 +135,7 @@ const QuanLySanPham = (item) => {
           />
         </TouchableOpacity>
         <Text style={{
-          ...Fonts.bold, fontSize: 20 * rate, color: Colors.neutralDark, flex: 4,
+          ...Fonts.bold, fontSize: 20 * rate, color: Colors.neutralDark, flex: 2,
         }}
         >
           Quản Lý Sản Phẩm
@@ -105,13 +143,44 @@ const QuanLySanPham = (item) => {
         <TouchableOpacity onPress={handleShowModalUpdateLogout}>
           <Image
             style={{
-              height: 30, width: 30, tintColor: Colors.primaryGreen, flex: 1,
-
+              height: 30, width: 30, tintColor: Colors.primaryGreen, flex: 2,
             }}
             source={images.new}
             resizeMode="contain"
           />
         </TouchableOpacity>
+      </View>
+
+      <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 15 * rate,
+        paddingHorizontal: 15 * rate,
+      }}
+      >
+
+        <View style={{
+          height: 50,
+          borderRadius: 15,
+          alignItems: 'center',
+          flexDirection: 'row',
+          backgroundColor: '#DADADA',
+          flex: 1,
+        }}
+        >
+          <Image
+            source={images.timkiem}
+            style={{ width: 25 * rate, height: 25 * rate, marginLeft: 7 * rate }}
+          />
+
+          <TextInput
+            onChangeText={(text) => searchFilterFunction(text)}
+            value={search}
+            placeholder="Tìm kiếm sản phẩm"
+            style={{ marginLeft: 10, flex: 1 }}
+          />
+
+        </View>
       </View>
 
       <View style={{ flex: 6, marginTop: 15 * rate, borderwidth: 2 }}>
@@ -126,7 +195,7 @@ const QuanLySanPham = (item) => {
         >
           <FlatList
             style={{}}
-            data={products}
+            data={filteredDataSource}
             keyExtractor={(item, index) => `listcaata-${index}`}
             showsHorizontalScrollIndicator={false}
             renderItem={({ item, index }) => {
@@ -233,7 +302,59 @@ const QuanLySanPham = (item) => {
               >
                 Tác giả
               </Text>
-              <TextInput
+
+              <View style={{
+                paddingHorizontal: 15 * rate,
+
+                ...Fonts.regular,
+                color: Colors.primaryPulple,
+                fontSize: 15 * rate,
+                alignItems: 'center',
+                flex: 2,
+                borderWidth: 1,
+                borderRadius: 15 * rate,
+                borderColor: Colors.neutralGrey,
+              }}
+              >
+                <Picker
+                  selectedValue={selectedValue}
+                  style={{
+                    height: 50,
+                    width: 200,
+                    ...Fonts.regular,
+                    color: Colors.primaryPulple,
+                    fontSize: 15 * rate,
+                    alignItems: 'center',
+
+                    borderWidth: 1,
+                    borderRadius: 15 * rate,
+                    borderColor: Colors.neutralGrey,
+                  }}
+                  onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                >
+
+                  <Picker.Item
+                    label="Ngô Tất Tố"
+                    value="1"
+                  />
+                  <Picker.Item
+                    label="Jim Erickson"
+                    value="2"
+                  />
+                  <Picker.Item
+                    label="Guillem Balague"
+                    value="3"
+                  />
+                  <Picker.Item
+                    label="Lưu Văn Thông"
+                    value="4"
+                  />
+                  <Picker.Item label="Nam Cao" value="5" />
+                  <Picker.Item label="Kim Lân" value="6" />
+                </Picker>
+              </View>
+
+              {/* <TextInput
                 onChangeText={(text) => settacgia(text)}
                 value={tacgia}
                 style={{
@@ -248,7 +369,7 @@ const QuanLySanPham = (item) => {
                   borderRadius: 15 * rate,
                   borderColor: Colors.neutralGrey,
                 }}
-              />
+              /> */}
 
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 5 * rate }}>
@@ -261,7 +382,54 @@ const QuanLySanPham = (item) => {
               >
                 Thể loại
               </Text>
-              <TextInput
+
+              <View style={{
+                paddingHorizontal: 15 * rate,
+
+                ...Fonts.regular,
+                color: Colors.primaryPulple,
+                fontSize: 15 * rate,
+                alignItems: 'center',
+                flex: 2,
+                borderWidth: 1,
+                borderRadius: 15 * rate,
+                borderColor: Colors.neutralGrey,
+              }}
+              >
+                <Picker
+                  selectedValue={selectedValue1}
+                  style={{
+                    height: 50,
+                    width: 200,
+                    ...Fonts.regular,
+                    color: Colors.primaryPulple,
+                    fontSize: 15 * rate,
+                    alignItems: 'center',
+
+                    borderWidth: 1,
+                    borderRadius: 15 * rate,
+                    borderColor: Colors.neutralGrey,
+                  }}
+                  onValueChange={(itemValue, itemIndex) => setSelectedValue1(itemValue)}
+                >
+
+                  <Picker.Item
+                    label="Thể thao"
+                    value="1"
+                  />
+                  <Picker.Item
+                    label="Văn học"
+                    value="2"
+                  />
+                  <Picker.Item
+                    label="Tin học"
+                    value="3"
+                  />
+
+                </Picker>
+              </View>
+
+              {/* <TextInput
                 onChangeText={(text) => settheloai(text)}
                 value={theloai}
                 style={{
@@ -276,7 +444,7 @@ const QuanLySanPham = (item) => {
                   borderRadius: 15 * rate,
                   borderColor: Colors.neutralGrey,
                 }}
-              />
+              /> */}
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 5 * rate }}>
               <Text style={{

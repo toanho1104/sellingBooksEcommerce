@@ -56,7 +56,8 @@ export const TAB_DATA = [
   },
 ]
 
-export const API_URL = 'http://192.168.1.68:3000'
+export const API_URL = 'http://192.168.43.220:3000'
+// export const API_URL = 'http://192.168.1.68:3000'
 // export const API_URL_TOPK = 'http://192.168.1.9:5001'
 export const API_URL_TOPK = 'https://localhost:5001'
 

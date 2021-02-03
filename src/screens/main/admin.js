@@ -22,24 +22,25 @@ import {
 const { width } = Dimensions.get('window')
 const rate = width / 375
 
-const handlePressqlsp = () => {
-  NavigationHelpers.navigateToScreen(SCREEN_NAME.QuanLySanPhamScreen)
-}
-
 const dangxuat = () => {
   NavigationHelpers.navigateToScreen(SCREEN_NAME.LoginScreen)
 }
 
 const Admin = (props) => {
   const dispatch = useDispatch()
-  const user = useSelector((state) => state.user, (user) => user)
+  const handlePressqlsp = () => {
+    dispatch(productActions.getProducts({
+    }, (response) => {
+      NavigationHelpers.navigateToScreen(SCREEN_NAME.QuanLySanPhamScreen)
+    }))
+  }
+  const user = useSelector((state) => state.user)
 
   const [isShowModalLogout, setIsShowModalLogout] = useState(false)
   const aniShowModal = useRef(new Animated.Value(0)).current
 
   const lichsumuahang = () => {
     dispatch(historyActions.getHoadon({
-
     }, (response) => {
       NavigationHelpers.navigateToScreen(SCREEN_NAME.LichSuDonHangScreen)
     }))
